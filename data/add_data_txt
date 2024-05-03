@@ -1,0 +1,39 @@
+    -- Thêm dữ liệu vào bảng cars
+    INSERT INTO cars (make, model, version, year, `condition`, mileage, price) 
+    VALUES 
+    ('Toyota', 'Camry', '2021 SE', 2021, 'New', 0, 30000.00),
+    ('Honda', 'Civic', '2020 LX', 2020, 'Used', 15000.50, 20000.00),
+    ('Ford', 'Mustang', '2022 GT', 2022, 'New', 0, 45000.00);
+
+    -- Thêm dữ liệu vào bảng cars_details
+    INSERT INTO cars_details (car_id, title, description, transmission, origin, body_style, color, fuel_type, engine_capacity, seats) 
+    VALUES 
+    (1, 'Toyota Camry 2021 SE', 'Brand new Toyota Camry 2021 SE with excellent condition.', 'Automatic', 'Japan', 'Sedan', 'Black', 'Gasoline', 2.5, 5),
+    (2, 'Honda Civic 2020 LX', 'Used Honda Civic 2020 LX in good condition.', 'CVT', 'Japan', 'Sedan', 'White', 'Gasoline', 2.0, 5),
+    (3, 'Ford Mustang 2022 GT', 'Brand new Ford Mustang 2022 GT with powerful engine.', 'Manual', 'USA', 'Coupe', 'Red', 'Gasoline', 5.0, 4);
+
+    -- Thêm dữ liệu vào bảng cars_image
+    INSERT INTO cars_image (car_id, image_url) 
+    VALUES 
+    (1, 'https://cms.anycar.vn/wp-content/uploads/2021/04/123e99b1-20210412_045409.jpg'),
+    (2, 'https://images.autofun.vn/file1/3f3cc8b8c93d4689ba5506c3388d2b50_678x380.jpg'),
+    (3, 'https://www.toyota.com.vn/media/z0gb2hjv/toyota-corolla-cross-noi-that-1.jpeg?width=778&height=481&mode=max');
+
+    -- Thêm dữ liệu vào bảng sellers_car
+    INSERT INTO sellers_car (name, province_city, address, phone, district) 
+    VALUES 
+    ('John Doe', 'California', '123 Main St', '123456789', 'Los Angeles'),
+    ('Jane Smith', 'New York', '456 Elm St', '987654321', 'Manhattan'),
+    ('Michael Johnson', 'Texas', '789 Oak St', '456123789', 'Houston');
+
+    -- Thêm dữ liệu vào bảng users
+    INSERT INTO users (full_name, phone_number, address, province_city, district, email, password) 
+    VALUES 
+    ('Alice Brown', '111222333', '789 Maple St', 'California', 'San Francisco', 'admin@gmail.com', '123'),
+    ('Bob Smith', '444555666', '101 Pine St', 'New York', 'Brooklyn', 'nhuvuthpt@gmail.com', '123');
+
+    -- Thêm dữ liệu vào bảng admins
+    INSERT INTO admins (username, password, email, full_name, date_of_birth, role) 
+    VALUES 
+    ('admin1', 'password123', 'admin1@example.com', 'Admin One', '1990-01-01', 'admin'),
+    ('admin2', 'password456', 'admin2@example.com', 'Admin Two', '1995-05-05', 'editor');

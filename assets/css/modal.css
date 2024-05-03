@@ -1,0 +1,158 @@
+/* Reset default browser styles (optional) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scroll when modal is open */
+}
+
+.open-modal-btn {
+    cursor: pointer;
+    transition: 0.25s; /* Add a smooth hover effect */
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.6
+    ); /* Semi-transparent black background */
+    display: flex; /* Center the modal content vertically */
+    justify-content: center;
+    align-items: center; /* Center the modal content horizontally */
+}
+
+.hide {
+    display: none;
+}
+
+.modal__inner {
+    max-width: 550px; /* Adjust width as needed */
+    border-radius: 20px;
+    max-height: auto;
+    background-color: #fff;
+    overflow: hidden;
+    animation: showModal linear 0.2s;
+    position: relative;
+    z-index: 9999; /* Số này có thể điều chỉnh tùy vào sự ưu tiên hiển thị bạn muốn */
+}
+.show {
+    display: block;
+}
+.f-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes showModal {
+    from {
+        opacity: 0;
+        transform: translateY(
+            -50px
+        ); /* Animate from slightly below the viewport */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: right; /* Space out header elements */
+    padding: 15px;
+    font-size: 17px;
+}
+.modal__header i {
+    font-size: 25px;
+    color: #adadad;
+    cursor: pointer;
+}
+.modal__body {
+    padding: 10px 53px;
+}
+
+.modal__body label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333; /* Màu chữ của nhãn */
+}
+.modal__body input[type="text"],
+.modal__body #phone,
+.modal__body input[type="email"],
+.modal__body input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.modal__body input[type="text"]:focus,
+.modal__body input[type="email"]:focus,
+.modal__body input[type="password"]:focus {
+    outline: none;
+    border: 1px solid #1a6fb7;
+}
+
+.modal__body span {
+    margin-left: 12px;
+}
+.modal__body i {
+    color: #adadad;
+    height: 25px;
+}
+
+.modal__text {
+    text-align: center;
+}
+.modal__text p {
+    font-weight: 400;
+    margin-top: 5px;
+}
+.modal__footer {
+    padding: 10px 20px;
+    text-align: center;
+}
+.modal__footer > p {
+    font-weight: 400;
+    padding: 10px 20px;
+}
+
+.modal__btn button {
+    text-align: center;
+    padding: 15px 190px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #c3c4cd;
+    background: #e6ebf2;
+}
+.modal__btn {
+    text-align: center;
+}
+/* Style the phone input field (optional) */
+
+/* Reset CSS */
+
+.form-input i {
+    color: #555;
+    padding-left: 10px;
+}
+
+.search {
+    display: flex;
+    margin-right: 28px;
+}

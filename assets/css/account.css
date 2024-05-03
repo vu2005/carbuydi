@@ -1,0 +1,203 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.account-all {
+    background: #f8f9fb;
+}
+
+.account {
+    margin: 0 200px;
+    flex-wrap: wrap;
+}
+.account-header {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.account-bt {
+    margin: auto 0;
+}
+.account-main {
+    display: flex;
+    justify-content: space-between;
+}
+.account-nav ul {
+    list-style: none;
+}
+.account-nav ul a {
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    text-decoration: none;
+}
+.account-nav ul a:hover {
+    color: #c6d2ea;
+}
+.account-nav ul li {
+    padding: 10px;
+}
+.account-bt > .ch {
+    padding: 10px 20px;
+    background: #ff9c00;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 7px;
+    margin-right: 5px;
+}
+.account-bt > .dt {
+    font-size: 14px;
+    border-radius: 7px;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    background: #1a6fb7;
+}
+.account-container {
+    background: #fff;
+    border: 1px solid #adadad;
+    border-radius: 10px;
+    width: 870px;
+}
+.account-body {
+    max-width: 870px;
+}
+.personal > b:hover {
+    color: #c6d2ea;
+    cursor: pointer;
+}
+.personal > i {
+    color: #1a6fb7;
+    font-size: 18px;
+    margin-right: 5px;
+}
+.service > i {
+    margin-right: 5px;
+    color: #1a6fb7;
+    font-size: 18px;
+}
+.service > b:hover {
+    color: #c6d2ea;
+    cursor: pointer;
+}
+
+.account-bt > button {
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng box shadow */
+}
+.account-container > h2 {
+    border-bottom: 1px solid #808080;
+    padding: 20px;
+}
+.account-container > form {
+    padding: 20px;
+}
+.account-container label {
+    display: block;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.account-container input[type="text"],
+.account-container input[type="address"],
+.account-container input[type="email"],
+.account-container input[type="password"] {
+    width: 70%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.account-container input[type="text"]:focus,
+.account-container input[type="email"]:focus,
+.account-container input[type="password"]:focus,
+.account-container input[type="address"]:focus {
+    outline: none;
+    border: 1px solid #1a6fb7;
+}
+.control.button {
+    padding: 12px 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background: #1a6fb7;
+    border-radius: 7px;
+}
+.control.button:hover {
+    background: #205b8f;
+}
+.account-container #district {
+    height: 48px;
+    width: 395px;
+    padding: 0 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+.account-container #province {
+    height: 48px;
+    padding: 0 10px;
+    width: 395px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+.account-container #province:focus,
+.account-container #district:focus {
+    outline: none;
+    border: 1px solid #1a6fb7;
+}
+.account-fl {
+    display: flex;
+    justify-content: space-between;
+}
+.account-eye {
+    position: relative;
+}
+.account-eye > i {
+    right: 31%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    cursor: pointer;
+    position: absolute;
+}
+.account-eye i {
+    position: absolute;
+    right: 31%;
+    top: 34%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.account-eye>input {
+    border-radius: 10px;
+    border: none;
+    outline: navajowhite;
+    padding: 10px;
+}
+
+.account-eye i::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    top: 6px;
+    left: 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.account-eye i.active::after {
+    opacity: 1;
+}

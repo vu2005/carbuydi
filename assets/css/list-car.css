@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.car-list {
+    background: #f8f9fb;
+}
+
+.car-list-box {
+    max-width: auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: space-around;
+}
+.car-list-box ul {
+    list-style: none;
+}
+.car-list-box ul a {
+    text-decoration: none;
+}
+.car-list-box h3 {
+    font-weight: 500;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.car-list-box ul li a {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #626262;
+}
+.brand {
+    width: 150px;
+}

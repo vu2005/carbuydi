@@ -1,0 +1,221 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    box-sizing: border-box;
+}
+
+.body-search input {
+    border: none;
+    font-size: 16px;
+    padding: 0 3px;
+    outline: none;
+    width: 100%;
+    height: 50px auto;
+    max-width: 100%;
+}
+.body-main {
+    display: flex;
+    justify-content: space-between;
+}
+.body-all {
+    margin: 0 50px;
+}
+.body-search {
+    width: 1090px;
+    /* border-radius: 5px; */
+}
+
+.btn-clen button {
+    margin: 15px 0;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    font-size: 18px;
+    background: #fff;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.btn-clen button :hover {
+    border-radius: 7px;
+    transition: 0.3s ease-in-out;
+    background: #ebf6f8e9;
+}
+.btn-clen button a {
+    color: #1a6fb7;
+    text-decoration: none;
+    padding: 7px;
+}
+.icon-search i {
+    margin: 18px 10px;
+}
+.body-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center; /* Canh chỉnh input với button */
+}
+
+.list-button h4 {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 500;
+    padding: 20px;
+    margin: 0; /* Loại bỏ margin mặc định */
+}
+
+.icon-list i {
+    font-size: 1.8em;
+    margin-right: 10px;
+}
+.icon-down i {
+    font-size: 1.5rem;
+}
+.text-typing {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.text-typing h1 {
+    font-size: 20px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    padding: 0 8px 0 0;
+    font-weight: 500;
+    color: #1a6fb7;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 10s steps(30) infinite, blink 1s infinite;
+    text-shadow: 0 0 100px #1a6fb7;
+}
+
+.text-typing button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: none;
+    background: white;
+    border: none;
+}
+.text-typing button p {
+    /* margin-right: 5px; */
+    color: #3f4047;
+    font-weight: 500;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 14px;
+}
+.text-typing button span {
+    /* margin: 2px; */
+    color: #1a6fb7;
+    padding: 0 4px;
+    font-weight: 500;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.text-typing button i {
+    font-size: 20px;
+}
+.in-result p {
+    font-size: 13px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.total-cars {
+    margin: 20px 0;
+}
+.products-sp {
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.products {
+    width: 340px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.products:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.header-products {
+    width: 340px;
+    height: 170px;
+    overflow: hidden;
+}
+
+.header-products img {
+    object-fit: cover;
+    width: 100%;
+    height: 170px;
+    border-radius: 10px 10px 0 0;
+}
+
+.text-products {
+    padding: 10px;
+}
+
+.text-products p {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: #31406f;
+}
+
+.text-products i {
+    color: red;
+}
+
+.text-products #hot {
+    margin-right: 10px;
+    color: orange;
+}
+
+.icon-products {
+    margin: 20px;
+    justify-content: space-between;
+    display: flex;
+}
+
+.icon-products ul {
+    list-style: none;
+}
+
+.icon-products li img {
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    padding-top: 5px;
+}
+.icon-products ul li {
+    color: #31406f;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.price-products {
+    margin: 20px 20px;
+    font-weight: 500;
+
+    color: red;
+}
+
+.map-products p {
+    margin: 0 20px;
+    font-size: 13px;
+}
+
+.products-a {
+    text-decoration: none;
+}

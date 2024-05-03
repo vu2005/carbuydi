@@ -1,0 +1,120 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* border: 1px solid #000; */
+}
+
+.form-login {
+    height: 100vh;
+    background-image: url(../images/layout-admin.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.box-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login {
+    width: 440px;
+    height: 420px;
+    border: 1px solid #000;
+    background: #fff;
+    border-radius: 20px;
+}
+
+.form-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.form-box h4 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 500;
+}
+
+.form-box p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #626262;
+    padding: 10px 0;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    width: calc(100%);
+    padding: 15px 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.input-group input::placeholder {
+    font-weight: 400;
+    color: #d4cece;
+}
+
+.login-btn-group {
+    text-align: center;
+}
+
+form > input[type="submit"] {
+    padding: 15px 0;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    width: calc(91%); /* Thêm một margin để nút không căn lề sát viền */
+    margin: 0 20px;
+    font-size: 16px;
+
+    cursor: pointer;
+    transition: background-color 0.3s; /* Thêm hiệu ứng hover */
+}
+
+form > input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+#footer {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-size: 14px;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+#moModalBtn {
+    color: #1a6fb7;
+    cursor: pointer;
+}
+div > span {
+    color: #1a6fb7;
+    cursor: pointer;
+}

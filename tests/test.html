@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Carbuydi</title>
+        <link rel="stylesheet" href="../assets/css/toast.css" />
+        <link rel="stylesheet" href="../assets/css/login.css" />
+        <link rel="stylesheet" href="../assets/css/footer.css" />
+        <link rel="stylesheet" href="../assets/css/header.css" />
+        <link rel="stylesheet" href="../assets/css/list-car.css" />
+        <link rel="stylesheet" href="../assets/css/modal.css" />
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+    </head>
+
+    <body>
+        <style>
+            .hide {
+                display: none;
+            }
+            .show {
+                display: block;
+            }
+        </style>
+        <div class="form-login">
+            <div class="box-login">
+                <div class="login">
+                    <div class="form-box">
+                        <h4>Đăng nhập</h4>
+                        <p>Trang đăng nhập để trở thành Đối tác của Carbuydi</p>
+                    </div>
+                    <form id="loginForm" method="post" action="#">
+                        <div class="input-group">
+                            <label for="email">Nhập Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Vd: vusena@gmail.com"
+                                required
+                            />
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Nhập Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Nhập mật khẩu"
+                                required
+                            />
+                        </div>
+                        <input
+                            type="submit"
+                            value="Đăng Nhập"
+                            name="btnlogin"
+                        />
+                        <div id="footer">
+                            <div>Quên mật khẩu?</div>
+                            <div>
+                                Chưa có tài khoản?<span id="registerBtn">
+                                    Đăng ký ngay</span
+                                >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="../assets/script/script.js"></script>
+        <form
+            method="post"
+            action="regitration.php"
+            enctype="multipart/form-data"
+        >
+            <div class="modal hide">
+                <div class="modal__inner">
+                    <div class="modal__header">
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <div class="modal__text">
+                        <h1>Đăng Ký Tài Khoản</h1>
+                        <p>Vui lòng điền đầy đủ thông tin</p>
+                    </div>
+                    <div class="modal__body">
+                        <label for="username">Tên đăng nhập:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Nhập tên đăng nhập"
+                            required
+                        />
+                        <label for="password">Mật khẩu:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Nhập mật khẩu"
+                            required
+                        />
+                        <label for="confirm_password">Nhập lại mật khẩu:</label>
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Nhập lại mật khẩu"
+                            required
+                        />
+                    </div>
+                    <div class="modal__btn">
+                        <button type="submit">
+                            Đăng ký <i class="bx bx-right-arrow-alt"></i>
+                        </button>
+                    </div>
+                    <div class="modal__footer">
+                        <p>
+                            Bằng cách nhấn vào nút Đăng ký, bạn sẽ là thành viên
+                            của Carbuydi☺
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Lắng nghe sự kiện click cho span "Đăng ký ngay"
+                document
+                    .getElementById("registerBtn")
+                    .addEventListener("click", function () {
+                        // Lấy phần tử modal
+                        var modal = document.querySelector(".modal");
+                        // Thêm lớp "show" để hiển thị modal
+                        modal.classList.add("show");
+                    });
+
+                // Lắng nghe sự kiện click cho nút đóng modal
+                document
+                    .querySelector(".modal__header i")
+                    .addEventListener("click", function () {
+                        // Lấy phần tử modal
+                        var modal = document.querySelector(".modal");
+                        // Loại bỏ lớp "show" để ẩn modal
+                        modal.classList.remove("show");
+                    });
+            });
+        </script>
+    </body>
+</html>

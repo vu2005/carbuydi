@@ -1,0 +1,389 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.steps-fl {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.bx-hop {
+    margin-right: 30px;
+    width: 255px;
+    height: 220px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    margin: 20px;
+}
+.steps {
+    background: #edeff5;
+    height: 95vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.steps > h1 {
+    font-size: 40px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    max-width: 1200px;
+    text-align: center;
+}
+.bx-ct {
+    padding: 35px 20px;
+}
+.bx-ct > img {
+    margin-bottom: 65px;
+}
+
+.bx-ct > p {
+    font-size: 15px;
+}
+.ban-xe1 {
+    height: 100vh;
+    background-image: url(../images/ban-xe0.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Ngăn lặp lại ảnh nền */
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.flex-banxe {
+    background: #fff;
+    max-width: 580px;
+    border-radius: 10px;
+    margin-right: 160px;
+    max-height: 520px;
+}
+.form-bx0 {
+    padding: 30px;
+}
+.form-bx0 > h3 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.ban-xe-sp {
+    display: flex;
+    justify-content: space-between;
+}
+.form-bx > input[type="text"] {
+    margin: 10px 0;
+    padding: 15px;
+    width: 253px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-weight: 400;
+    outline: none;
+}
+.form-bx > input[type="text"]::placeholder {
+    font-weight: 400;
+    color: #000;
+}
+
+.form-bx label {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.btn-bx {
+    padding: 18px 170px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #1a6fb7;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.btn-bx:hover {
+    background: #1c4e7a;
+}
+.form-bx > input[type="text"]:focus {
+    border: 1px solid #1a6fb7;
+}
+.note {
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    padding-top: 20px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.note > a {
+    color: #1a6fb7;
+    font-weight: 400;
+    font-size: 13px;
+}
+/* CSS cho phiên bản xe */
+.form-bx select {
+    margin: 10px 0;
+    padding: 15px;
+    width: 253px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif; /* Chỉnh font chữ */
+    font-size: 15px; /* Chỉnh kích thước chữ */
+    appearance: none; /* Ẩn các phần tử gốc của select */
+    font-size: 14px;
+    font-weight: 400;
+    background-size: 24px; /* Kích thước của mũi tên */
+}
+select option {
+    font-weight: 400;
+}
+
+.form-bx select:focus {
+    border: 1px solid #1a6fb7;
+}
+
+/* CSS cho các phần tử label */
+.form-bx label {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+.bt-bx {
+    background: #1a6fb7;
+    width: 200px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 7px;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+.bt-bx > a {
+    text-decoration: none;
+    color: white;
+}
+.reason {
+    height: 85vh;
+    background: #fff;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.reason > h1 {
+    text-align: center;
+    margin: 100px 0;
+}
+.reason0 {
+    display: flex;
+    justify-content: center;
+}
+.reason1 {
+    margin-right: 30px;
+    width: 400px;
+    height: 245px;
+}
+.reason1 > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.reason2 > ul > li {
+    list-style: none;
+    display: flex;
+}
+.reason2 > ul > li > img {
+    width: 100px;
+    margin-right: 20px;
+    height: 100px;
+}
+.reason2 > ul > li > p {
+    margin-top: 10px;
+}
+.accreditation {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    background: #f8f9fb;
+    height: 100vh;
+}
+.accreditation > h1 {
+    text-align: center;
+    padding: 50px 0;
+}
+.accreditation0 {
+    display: flex;
+    justify-content: space-evenly;
+}
+.accreditation1 > ul > li {
+    padding: 20px;
+    list-style: none;
+    display: flex;
+}
+.accreditation1 {
+    display: flex;
+    align-items: center;
+}
+
+.accreditation1 > ul > li > img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 10px;
+}
+.accreditation > .bt-bx {
+    display: block;
+    align-items: center;
+}
+.sale-car > h1 {
+    width: 500px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0;
+    color: #fff;
+}
+.images-blur {
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    background-image: url(../images/HYUNDAI_45.gif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Ngăn lặp lại ảnh nền */
+    height: 85vh;
+}
+
+.sale-car > .bt-bx {
+    display: block;
+    align-items: center;
+}
+.comment {
+    height: 100vh;
+    background: #0d385c;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.comment > h1 {
+    text-align: center;
+    color: #fff;
+    padding: 50px 0;
+}
+.comment-user {
+    width: 540px;
+    display: grid;
+    place-items: center;
+    height: 240px;
+    border-radius: 20px;
+    background: #fff;
+    position: relative;
+}
+
+.comment-text {
+    padding: 30px;
+}
+.comment-text > p {
+    font-weight: 400;
+}
+.cm-text {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.bx-fff > i {
+    width: 1.5em;
+    position: absolute;
+    height: 1.5em;
+    transform: rotate(45deg);
+    background: #fff;
+    color: #fff;
+    font-size: 20px;
+    bottom: -14px;
+}
+.bx-fff {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment0 {
+    display: flex;
+    margin: 0 auto;
+    width: 1110px;
+    height: 400px;
+    justify-content: space-between;
+}
+.name-user {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
+.name-user > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #1a6fb7;
+    margin-top: 100px;
+    object-fit: cover;
+}
+.img-rote {
+    width: 65px;
+    height: 65px;
+    border: 3px solid #1a6fb7;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.center > p {
+    margin-top: 120px;
+    color: #fff;
+}
+.quiz {
+    background: #eef1f4;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+    padding-bottom: 100px;
+    border-radius: 10px;
+}
+.quiz > h1 {
+    text-align: center;
+    padding: 50px 0;
+}
+.bx-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    border-bottom: 1px solid #808080;
+}
+.bx-title > i {
+    font-size: 30px;
+    color: #adadad;
+}
+
+.banreply > p {
+    font-weight: 400;
+    font-size: 15px;
+    padding: 25px;
+    font-weight: 400;
+}
+.banreply {
+    display: none;
+}
+.quiz0 {
+    border-radius: 10px;
+    border: 1px solid #fff;
+    max-width: 1080px;
+    background: #fff;
+    cursor: pointer;
+    height: auto;
+    margin: 0 auto;
+}

@@ -1,0 +1,83 @@
+CREATE DATABASE IF NOT EXISTS carbuydi CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE carbuydi;
+
+-- Bảng xe (cars)
+CREATE TABLE cars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    make VARCHAR(255), -- Hãng xe
+    model VARCHAR(255), -- Dòng xe
+    version VARCHAR(255), -- Phiên bản
+    year INT, -- Năm sản xuất
+    `condition` VARCHAR(50), -- Tình trạng
+    mileage DECIMAL(10, 2), -- Số KM
+    price DECIMAL(15, 2) -- Giá
+);
+
+-- Bảng chi tiết xe (cars_details)
+CREATE TABLE cars_details (
+    car_id INT PRIMARY KEY,
+    title VARCHAR(255), -- Tiêu đề
+    description TEXT, -- Mô tả
+    transmission VARCHAR(50), -- Hộp số
+    origin VARCHAR(255), -- Xuất xứ 
+    body_style VARCHAR(50), -- Kiểu dáng
+    color VARCHAR(50), -- Màu sắc
+    fuel_type VARCHAR(50), -- Loại nhiên liệu
+    engine_capacity DECIMAL(5, 2), -- Dung tích động cơ (lít)
+    seats INT, -- Số ghế
+    FOREIGN KEY (car_id) REFERENCES cars(id)
+);
+
+-- Bảng hình ảnh xe (cars_image)
+CREATE TABLE cars_image (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT,
+    image_url VARCHAR(255), -- Đường dẫn đến hình ảnh của xe
+    FOREIGN KEY (car_id) REFERENCES cars(id)
+);
+CREATE TABLE sellers_car (
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Mã định danh duy nhất cho mỗi người bán (khóa chính)
+    name VARCHAR(255), -- Họ và tên người bán
+    company_name VARCHAR(255), -- Tên công ty
+    province_city VARCHAR(255), -- Tỉnh/Thành phố
+    address VARCHAR(255), -- Địa chỉ
+    phone VARCHAR(20), -- Số điện thoại
+    district VARCHAR(255), -- Quận/Huyện
+    posted_date DATE, -- Ngày đăng thông tin về sản phẩm
+    car_id INT, -- Mã xe (khóa ngoại từ bảng cars)
+    image_url VARCHAR(255), -- Đường dẫn đến hình ảnh của người bán
+    FOREIGN KEY (car_id) REFERENCES cars(id) -- Liên kết với bảng cars
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255),
+    phone_number VARCHAR(20),
+    address VARCHAR(255),
+    province VARCHAR(255),
+    district VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+CREATE TABLE users_sell_cars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    make VARCHAR(255),
+    model VARCHAR(255),
+    version VARCHAR(255),
+    year INT,
+    mileage INT,
+    phone VARCHAR(20),
+    posted_date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+-- Bảng admin
+CREATE TABLE admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    full_name VARCHAR(255),
+    date_of_birth DATE,
+    role ENUM('admin', 'editor') DEFAULT 'admin'
+);

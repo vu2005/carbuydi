@@ -1,0 +1,20 @@
+<?php
+echo "<div class=\"account-nav\">";
+echo "    <div class=\"personal\">";
+echo "        <i class='bx bxs-user-circle'></i>";
+echo "        <b>Tài khoản cá nhân</b>";
+echo "        <ul>";
+echo "            <li><a href=\"account.php?id=" . $_SESSION['user_id'] . "\">Thông tin tài khoản</a></li>";
+echo "            <li><a href=\"change-password.php?id=" . $_SESSION['user_id'] . "\">Đổi mật khẩu</a></li>";
+echo "        </ul>";
+echo "    </div>";
+echo "    <div class=\"service\">";
+echo "        <i class='bx bxs-shopping-bags'></i>";
+echo "        <b>Các dịch vụ của tôi</b>";
+echo "        <ul>";
+echo "            <li><a href=\"account.store.php\">Quản lý cửa hàng</a></li>";
+echo "            <li><a href=\"account.vehicle.php\">Quản lý xe</a></li>";
+echo "            <li><a href=\"account.transaction.php\">Lịch sử giao dịch</a></li>";
+echo "        </ul>";
+echo "    </div>";
+echo "</div>";

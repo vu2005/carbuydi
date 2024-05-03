@@ -1,0 +1,51 @@
+.wallpaper {
+    max-width: 100%;
+    justify-content: center;
+    height: auto;
+    overflow: hidden;
+    margin: 0 50px;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.wallpaper .container {
+    display: flex;
+    overflow-x: hidden; /* Đặt thành hidden để ẩn thanh cuộn ngang */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+.card-img img {
+    border-radius: 10px;
+    height: 120px;
+    width: 310px;
+    flex: 0 0 auto;
+
+    scroll-snap-align: start;
+}
+
+.event-button {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom: 80px;
+    padding: 0 10px;
+}
+
+.control {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    transition: background-color 0.3s ease;
+}
+.control:active {
+    transform: scale(0.9);
+}
+
+.control:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}

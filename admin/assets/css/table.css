@@ -1,0 +1,189 @@
+.control.button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container style */
+.container {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Table style */
+.table-data {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.label-with-time {
+    display: flex;
+    align-items: center; /* Canh các phần tử theo chiều dọc */
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+.label-with-image {
+    display: flex;
+    align-items: center; /* Canh các phần tử theo chiều dọc */
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+.label-with-input {
+    display: inline-block;
+    vertical-align: middle; /* Canh nội dung theo chiều dọc */
+}
+
+.table-data th,
+.table-data td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.table-data th {
+    background-color: #f2f2f2;
+}
+td > img {
+    width: 100px;
+    height: 50px;
+}
+
+.btn-add {
+    margin-top: 20px;
+    text-decoration: none;
+    background-color: #1a6fb7;
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-view {
+    color: white;
+    background-color: #26a352;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.btn-edit {
+    color: white;
+    background-color: #d6ee00;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.btn-delete {
+    color: white;
+    background-color: #ee0000;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.container > h3 {
+    margin: 20px 0;
+}
+.btn-view:hover {
+    background-color: #297745;
+}
+.btn-add:hover {
+    background-color: #255f92;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container style */
+.container-edit {
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+    border: 1px solid #1a6fb7;
+    border-radius: 10px;
+    background: #fff;
+    padding: 20px;
+}
+
+/* Form style */
+#productForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-edit {
+    background: #fff;
+    border: 1px solid #1a6fb7;
+    border-radius: 10px;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-edit0,
+.form-edit1 {
+    flex: 1;
+    margin-right: 20px;
+}
+
+/* Label style */
+.form-edit > label {
+    margin-bottom: 8px;
+    display: block;
+    font-weight: bold;
+}
+
+/* Input style */
+input[type="text"],
+select,
+input[type="number"],
+input[type="file"],
+input[type="email"],
+input[type="password"],
+.radio_group,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Radio group style */
+.radio_group {
+    display: flex;
+}
+
+.function-btn-0 {
+    display: flex;
+    margin: 20px auto;
+    justify-content: space-between;
+}
