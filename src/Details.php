@@ -6,19 +6,30 @@ $row = []; // Khởi tạo biến $row trước khi sử dụng
 // Kiểm tra xem có ID sản phẩm được truyền qua URL không
 if (isset($_GET['id'])) {
     $id_product = $_GET['id']; // Lấy ID từ URL
-    // Truy vấn sản phẩm có ID tương tự từ bảng cars
-    $sql = "SELECT cars.*, cars_details.*, sellers_car.*, cars_image.image_url, COUNT(cars_image.id) AS image_count
-        FROM cars 
-        LEFT JOIN cars_details ON cars.id = cars_details.car_id 
-        LEFT JOIN sellers_car ON cars.id = sellers_car.id 
-        LEFT JOIN cars_image ON cars.id = cars_image.car_id
-        WHERE cars.id = $id_product";
+
+    // Truy vấn thông tin xe từ bảng cars và các bảng liên quan
+    $sql = "SELECT cars.*, cars_details.*, sellers_car.*, 
+            cars_image.products_image,
+            cars_image.front_image,
+            cars_image.rear_image, 
+            cars_image.left_image, 
+            cars_image.right_image, 
+            cars_image.dashboard_image, 
+            cars_image.inspection_image, 
+            cars_image.other_image
+            FROM cars
+            LEFT JOIN cars_details ON cars.id = cars_details.car_id
+            LEFT JOIN sellers_car ON cars.id = sellers_car.car_id
+            LEFT JOIN cars_image ON cars.id = cars_image.car_id
+            WHERE cars.id = $id_product"; // Sử dụng $id_product để lọc kết quả
 
     $result = $conn->query($sql);
 
     // Kiểm tra xem có kết quả trả về không
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
+        // Lấy thông tin từ kết quả truy vấn
         $posted_date = $row['posted_date'];
         $title = $row['title'];
         $price = $row['price'];
@@ -31,9 +42,6 @@ if (isset($_GET['id'])) {
         $location = $row['address']; // Địa chỉ của người bán
         $seller_name = $row['name']; // Tên người bán
         $seller_phone = $row['phone']; // Số điện thoại người bán
-        $image_url = $row['image_url']; // Số điện thoại người bán
-        $image_count = $row['image_count']; // Số lượng hình ảnh
-
     } else {
         echo '<span class="msg">Đã xảy ra lỗi khi cập nhật sản phẩm!</span>';
     }
@@ -65,6 +73,7 @@ if (isset($_GET['id'])) {
     ?>
     <div class="details" style="margin: 0 50px;">
         <p>Ngày đăng: <?php echo $row['posted_date']; ?></p>
+
         <div class="details0">
             <div class="products-details">
                 <div class="products-details1">
@@ -77,16 +86,105 @@ if (isset($_GET['id'])) {
                                 <i class="bx bx-chevron-right"></i>
                             </span>
                             <div class="img-wrap">
-                                <img src="<?php echo $row['image_url']; ?>" alt="" />
+                                <img src="<?php echo $row['products_image']; ?>" alt="" />
                             </div>
-                            <p class="quantity-img"><?php echo $image_count; ?>/<?php echo $image_count; ?></p>
+                            <p class="quantity-img">1/8</p>
                         </div>
-                        <div class="details-list-img">
-                            <div>
-                                <img src="<?php echo $row['image_url']; ?>" alt="" />
+                        <div class="w830px">
+                            <div class="max-w830">
+                                <div class="details-list-img">
+                                    <div class="active">
+                                        <img src="<?php echo $row['products_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['front_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['rear_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['left_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['right_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['dashboard_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['inspection_image']; ?>" alt="" />
+                                    </div>
+                                    <div>
+                                        <img src="<?php echo $row['other_image']; ?>" alt="" />
+                                    </div>
+                                </div>
                             </div>
+                            <div class="btn-next"><i class="bx bx-chevron-right"></i></div>
+                            <div class="btn-prev"><i class="bx bx-chevron-left"></i></div>
                         </div>
+                        <script>
+                            let tiep = document.querySelector(".btn-next");
+                            let lui = document.querySelector(".btn-prev");
+                            let sliderContainer = document.querySelector(".max-w830");
+                            let slideWidth = 370; // Độ dài mỗi lần di chuyển
+                            let listDivImg = document.querySelectorAll(".details-list-img div");
+                            let next = document.querySelector(".next");
+                            let prev = document.querySelector(".prev");
+                            let imgWrap = document.querySelector(".img-wrap img");
+                            let currentIndex = 0;
+                            let totalImages = listDivImg.length;
+
+                            setCurrent(currentIndex);
+
+                            function setCurrent(index) {
+                                currentIndex = index;
+                                imgWrap.src = listDivImg[currentIndex].querySelector("img").src;
+
+                                // remove all active div
+                                listDivImg.forEach((item) => {
+                                    item.classList.remove("active");
+                                });
+
+                                // set active
+                                listDivImg[currentIndex].classList.add("active");
+
+                                // update quantity
+                                document.querySelector(".quantity-img").textContent = `${currentIndex + 1}/${totalImages}`;
+
+                                // update border
+                                listDivImg.forEach((item, index) => {
+                                    if (index === currentIndex) {
+                                        item.classList.add("active");
+                                    } else {
+                                        item.classList.remove("active");
+                                    }
+                                });
+                            }
+
+                            listDivImg.forEach((div, index) => {
+                                div.addEventListener("click", (e) => {
+                                    setCurrent(index);
+                                });
+                            });
+                            tiep.addEventListener("click", () => {
+                                sliderContainer.scrollLeft += slideWidth;
+                            });
+
+                            lui.addEventListener("click", () => {
+                                sliderContainer.scrollLeft -= slideWidth;
+                            });
+                            next.addEventListener("click", () => {
+                                currentIndex = (currentIndex + 1) % totalImages;
+                                setCurrent(currentIndex);
+                            });
+
+                            prev.addEventListener("click", () => {
+                                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                                setCurrent(currentIndex);
+                            });
+                        </script>
                     </div>
+
                     <div class="parameter">
                         <h2>Thông số kỹ thuật</h2>
                         <div class="parameter-table">
@@ -252,45 +350,6 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var toggleBtn = document.getElementById("toggleContentBtn"); // Changed the ID
-            var content = document.querySelector(".hidden"); // Corrected selector
-
-            toggleBtn.addEventListener("click", function() {
-                if (content.classList.contains("hidden")) {
-                    content.classList.remove("hidden");
-                    toggleBtn.innerHTML = "Thu gọn <i class='bx bxs-chevron-up'></i>";
-                } else {
-                    content.classList.add("hidden");
-                    toggleBtn.innerHTML = "Xem thêm <i class='bx bxs-chevron-down'></i>";
-                }
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const callSellerBtn = document.getElementById('callSeller');
-            const phoneNumber = document.getElementById('phoneNumber');
-
-            callSellerBtn.addEventListener('click', function() {
-                // Thay đổi văn bản của nút thành số điện thoại
-                callSellerBtn.textContent = phoneNumber.textContent;
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleBtn = document.getElementById('toggleBtn');
-            const hiddenText = document.getElementById('hiddenText');
-
-            toggleBtn.addEventListener('click', function() {
-                if (hiddenText.classList.contains('hidden')) {
-                    hiddenText.classList.remove('hidden');
-                    toggleBtn.innerHTML = "Thu gọn <i class='bx bxs-chevron-up'></i>";
-                } else {
-                    hiddenText.classList.add('hidden');
-                    toggleBtn.innerHTML = "Xem thêm <i class='bx bxs-chevron-down'></i>";
-                }
-            });
-        });
-    </script>
 
     <script src="../assets/script/script.js"></script>
 </body>

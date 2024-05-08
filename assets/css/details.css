@@ -16,7 +16,7 @@
 
 .img-wrap {
     height: 480px;
-    width: 820px;
+    width: 830px;
     border-radius: 10px;
 }
 .img-wrap > img {
@@ -61,8 +61,23 @@
 .details-list-img {
     margin: 20px 0;
     display: flex;
+    /* max-width: 830px; */
     border-radius: 10px;
 }
+.max-w830 {
+    display: flex;
+    max-width: 830px;
+    overflow-x: auto; /* Sử dụng overflow-x thay vì overflow */
+    overflow-y: hidden;
+    scroll-behavior: smooth; /* Cho phép cuộn mượt */
+    scrollbar-width: none; /* Ẩn thanh cuộn mặc định trên Chrome */
+    -ms-overflow-style: none; /* Ẩn thanh cuộn mặc định trên IE và Edge */
+}
+
+.max-w830::-webkit-scrollbar {
+    display: none; /* Ẩn thanh cuộn mặc định trên Firefox */
+}
+
 .details-list-img div {
     margin: 0 5px;
     width: 180px;
@@ -70,6 +85,54 @@
     height: 100px;
     border-radius: 10px;
 }
+
+.btn-next:hover,
+.btn-prev:hover {
+    background-color: rgba(
+        255,
+        255,
+        255,
+        0.8
+    ); /* Thay đổi màu nền khi di chuột qua */
+}
+
+.btn-next i,
+.btn-prev i {
+    font-size: 24px; /* Cỡ chữ của biểu tượng */
+}
+.btn-next,
+.btn-prev {
+    width: 40px; /* Độ rộng của nút */
+    height: 40px; /* Chiều cao của nút */
+    background-color: rgba(255, 255, 255, 0.5); /* Màu nền của nút */
+    display: flex; /* Hiển thị các biểu tượng ở giữa */
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    cursor: pointer; /* Hiển thị con trỏ khi di chuột qua nút */
+}
+.btn-next {
+    top: 50%; /* Đưa nút điều hướng vào vị trí giữa theo chiều dọc */
+    transform: translateY(
+        -50%
+    ); /* Dịch chuyển nút điều hướng lên trên một nửa chiều cao của nó để nằm chính giữa */
+    display: flex;
+    right: 0;
+    position: absolute;
+}
+.w830px {
+    position: relative;
+    width: 830px;
+}
+.btn-prev {
+    left: 0;
+    top: 50%; /* Đưa nút điều hướng vào vị trí giữa theo chiều dọc */
+    transform: translateY(
+        -50%
+    ); /* Dịch chuyển nút điều hướng lên trên một nửa chiều cao của nó để nằm chính giữa */
+    display: flex;
+    position: absolute;
+}
+
 .details-list-img div > img {
     cursor: pointer;
     width: 100%;
@@ -78,7 +141,7 @@
     border-radius: 5px;
 }
 .details-list-img div.active {
-    border: 3px solid #1a6fb7;
+    border: 3px solid #1a6fb7; /* Tạo khung viền cho ảnh được chọn */
 }
 .parameter > h2 {
     margin: 20px 0;

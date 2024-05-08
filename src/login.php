@@ -62,7 +62,6 @@ if (isset($_POST['btnlogin'])) {
 <body>
     <?php
     require_once("header.php");
-
     ?>
     <div class="form-login">
         <div class="box-login">

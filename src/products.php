@@ -20,7 +20,18 @@ echo "<p class='total-cars'>Tổng số lượng xe: " . $total_cars . "</p>";
 echo "<div class='products-sp'>"; // Mở thẻ cha products-sp ở đây
 
 // Truy vấn dữ liệu sản phẩm từ các bảng cars, cars_details, cars_image và sellers_car
-$sql = "SELECT cars.*, cars_details.transmission, cars_details.title AS car_title, cars_image.image_url, sellers_car.address 
+$sql = "SELECT cars.*,
+ cars_details.transmission,
+ cars_details.title AS car_title,
+ cars_image.products_image,
+ cars_image.front_image,
+ cars_image.rear_image, 
+ cars_image.left_image, 
+ cars_image.right_image, 
+ cars_image.dashboard_image, 
+ cars_image.inspection_image, 
+ cars_image.other_image, 
+ sellers_car.address 
         FROM cars 
         LEFT JOIN cars_details ON cars.id = cars_details.car_id 
         LEFT JOIN cars_image ON cars.id = cars_image.car_id 
@@ -43,7 +54,15 @@ if ($result->num_rows > 0) {
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";
             // Hiển thị hình ảnh của sản phẩm
-            echo "<div><img src='" . $row['image_url'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['products_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['front_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['rear_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['left_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['right_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['dashboard_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['inspection_image'] . "' alt=''></div>";
+            echo "<div><img src='" . $row['other_image'] . "' alt=''></div>";
+
             echo "</div>";
             echo "</div>";
             echo "</a>";

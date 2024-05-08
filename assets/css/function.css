@@ -35,11 +35,11 @@
 .function-box > ul > li {
     display: flex;
     text-align: left;
-    padding: 15px 10px 15px 0px;
+    padding: 8px;
 }
 
 .function-box > ul > li > p {
-    padding-right: 130px;
+    width: 180px;
 }
 
 .function-box > ul > li > input {
@@ -49,8 +49,9 @@
 }
 
 .function-box1 > ul > li {
-    padding-left: 10px;
     display: flex;
+    padding: 2px 20px;
+    margin-bottom: 5px;
 }
 
 .function-box1 > ul > li > input {
@@ -64,10 +65,6 @@
     /* Để loại bỏ viền xung quanh khi focus */
 }
 
-.function-box {
-    width: 100%;
-}
-
 .fn-box input {
     background: none;
     border: none;
@@ -77,7 +74,9 @@
 .function-box1 {
     display: none;
 }
-
+.function-box1 > ul > li > p {
+    font-size: 14px;
+}
 .flex-function {
     justify-content: space-between;
     display: none;

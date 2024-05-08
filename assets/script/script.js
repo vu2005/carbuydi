@@ -105,3 +105,59 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const callSellerBtn = document.getElementById("callSeller");
+    const phoneNumber = document.getElementById("phoneNumber");
+
+    callSellerBtn.addEventListener("click", function () {
+        // Thay đổi văn bản của nút thành số điện thoại
+        callSellerBtn.textContent = phoneNumber.textContent;
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggleBtn");
+    const hiddenText = document.getElementById("hiddenText");
+
+    toggleBtn.addEventListener("click", function () {
+        if (hiddenText.classList.contains("hidden")) {
+            hiddenText.classList.remove("hidden");
+            toggleBtn.innerHTML = "Thu gọn <i class='bx bxs-chevron-up'></i>";
+        } else {
+            hiddenText.classList.add("hidden");
+            toggleBtn.innerHTML =
+                "Xem thêm <i class='bx bxs-chevron-down'></i>";
+        }
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    var toggleBtn = document.getElementById("toggleContentBtn"); // Changed the ID
+    var content = document.querySelector(".hidden"); // Corrected selector
+
+    toggleBtn.addEventListener("click", function () {
+        if (content.classList.contains("hidden")) {
+            content.classList.remove("hidden");
+            toggleBtn.innerHTML = "Thu gọn <i class='bx bxs-chevron-up'></i>";
+        } else {
+            content.classList.add("hidden");
+            toggleBtn.innerHTML =
+                "Xem thêm <i class='bx bxs-chevron-down'></i>";
+        }
+    });
+});
+function functionClick(element) {
+    var functionNav = element.nextElementSibling;
+    toggleDisplay(functionNav);
+}
+
+function functionClick1(element) {
+    var functionBox = element.parentElement.nextElementSibling;
+    toggleDisplay(functionBox);
+}
+
+function toggleDisplay(element) {
+    if (window.getComputedStyle(element).display === "block") {
+        element.style.display = "none";
+    } else {
+        element.style.display = "block";
+    }
+}

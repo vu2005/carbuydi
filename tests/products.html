@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+        />
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="products">
+            <a href="">
+                <div class="header-products">
+                    <div class="carousel">
+                        <div>
+                            <img src="" alt="Image 1" />
+                        </div>
+                        <div>
+                            <img src="" alt="Image 2" />
+                        </div>
+                        <div>
+                            <img src="" alt="Image 3" />
+                        </div>
+                    </div>
+
+                    <button class="prevBtn">Previous</button>
+                    <button class="nextBtn">Next</button>
+                </div>
+            </a>
+            <div class="text-products">
+                <p>
+                    <i class="bx bxs-hot"></i
+                    ><i id="hot" class="bx bxs-hot"></i>Toyota Corolla
+                </p>
+                <p>Toyota Corolla GLi 2018</p>
+            </div>
+            <div class="icon-products">
+                <ul>
+                    <li><img src="../assets/images/icon1.svg" alt="" /></li>
+                    2018
+                    <li>
+                        <img
+                            src="../assets/images/icon2.svg"
+                            alt="Mileage Icon"
+                        />45000.00 Km
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <img
+                            src="../assets/images/icon3.svg"
+                            alt="Transmission Icon"
+                        />
+                    </li>
+                    <li><img src="../assets/images/icon4.svg" alt="" /></li>
+                </ul>
+            </div>
+            <div class="map-products">
+                <p>
+                    <i class="bx bx-map"></i>
+                </p>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".carousel").slick({
+                    autoplay: false, // Tự động chuyển slide (tắt)
+                    arrows: false, // Ẩn các nút điều hướng mặc định của Slick
+                });
+
+                // Xử lý sự kiện khi nhấn nút "Next"
+                $(".nextBtn").click(function () {
+                    $(".carousel").slick("slickNext"); // Chuyển tới slide tiếp theo
+                });
+
+                // Xử lý sự kiện khi nhấn nút "Previous"
+                $(".prevBtn").click(function () {
+                    $(".carousel").slick("slickPrev"); // Chuyển tới slide trước đó
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -8,7 +8,7 @@ CREATE TABLE cars (
     model VARCHAR(255), -- Dòng xe
     version VARCHAR(255), -- Phiên bản
     year INT, -- Năm sản xuất
-    `condition` VARCHAR(50), -- Tình trạng
+    `condition` VARCHAR(50), -- Tình trạng (Ví dụ: Mới, Đã qua sử dụng)
     mileage DECIMAL(10, 2), -- Số KM
     price DECIMAL(15, 2) -- Giá
 );
@@ -18,9 +18,9 @@ CREATE TABLE cars_details (
     car_id INT PRIMARY KEY,
     title VARCHAR(255), -- Tiêu đề
     description TEXT, -- Mô tả
-    transmission VARCHAR(50), -- Hộp số
-    origin VARCHAR(255), -- Xuất xứ 
-    body_style VARCHAR(50), -- Kiểu dáng
+    transmission VARCHAR(50), -- Hộp số (Ví dụ: Số tự động, Số sàn)
+    origin VARCHAR(255), -- Xuất xứ (Ví dụ: Nhập khẩu, Lắp ráp trong nước)
+    body_style VARCHAR(50), -- Kiểu dáng (Ví dụ: Sedan, SUV, Hatchback)
     color VARCHAR(50), -- Màu sắc
     fuel_type VARCHAR(50), -- Loại nhiên liệu
     engine_capacity DECIMAL(5, 2), -- Dung tích động cơ (lít)
@@ -28,18 +28,27 @@ CREATE TABLE cars_details (
     FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
--- Bảng hình ảnh xe (cars_image)
 CREATE TABLE cars_image (
     id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT,
-    image_url VARCHAR(255), -- Đường dẫn đến hình ảnh của xe
+    shop_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xecars_image
+    products_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xecars_image
+    front_image VARCHAR(255), -- Đường dẫn đến ảnh trước xe
+    rear_image VARCHAR(255), -- Đường dẫn đến ảnh sau xe
+    left_image VARCHAR(255), -- Đường dẫn đến ảnh bên trái xe
+    right_image VARCHAR(255), -- Đường dẫn đến ảnh bên phải xe
+    dashboard_image VARCHAR(255), -- Đường dẫn đến ảnh dashboard
+    inspection_image VARCHAR(255), -- Đường dẫn đến ảnh đăng kiểm
+    other_image VARCHAR(255), -- Đường dẫn đến ảnh khác
     FOREIGN KEY (car_id) REFERENCES cars(id)
 );
+
+-- Bảng thông tin người bán xe (sellers_car)
 CREATE TABLE sellers_car (
     id INT AUTO_INCREMENT PRIMARY KEY, -- Mã định danh duy nhất cho mỗi người bán (khóa chính)
     name VARCHAR(255), -- Họ và tên người bán
-    company_name VARCHAR(255), -- Tên công ty
-    province_city VARCHAR(255), -- Tỉnh/Thành phố
+    company_name VARCHAR(255), -- Tên công ty (Nếu có)
+    province VARCHAR(255), -- Tỉnh/Thành phố
     address VARCHAR(255), -- Địa chỉ
     phone VARCHAR(20), -- Số điện thoại
     district VARCHAR(255), -- Quận/Huyện
@@ -49,35 +58,45 @@ CREATE TABLE sellers_car (
     FOREIGN KEY (car_id) REFERENCES cars(id) -- Liên kết với bảng cars
 );
 
+-- Bảng thông tin người dùng (users)
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(255),
-    phone_number VARCHAR(20),
-    address VARCHAR(255),
-    province VARCHAR(255),
-    district VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255) NOT NULL
+    full_name VARCHAR(255), -- Họ và tên đầy đủ của người dùng
+    phone_number VARCHAR(20), -- Số điện thoại
+    address VARCHAR(255), -- Địa chỉ
+    province VARCHAR(255), -- Tỉnh/Thành phố
+    district VARCHAR(255), -- Quận/Huyện
+    email VARCHAR(255) UNIQUE, -- Địa chỉ email (duy nhất)
+    password VARCHAR(255) NOT NULL -- Mật khẩu (không được để trống)
 );
+
+CREATE TABLE users_image (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  avt_image VARCHAR(255) COMMENT 'Đường dẫn đến hình ảnh của người dùng (avatar)',
+  shop_image VARCHAR(255) COMMENT 'Đường dẫn đến hình ảnh của cửa hàng'
+);
+-- Bảng thông tin người dùng bán xe (users_sell_cars)
 CREATE TABLE users_sell_cars (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    make VARCHAR(255),
-    model VARCHAR(255),
-    version VARCHAR(255),
-    year INT,
-    mileage INT,
-    phone VARCHAR(20),
-    posted_date DATE,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    user_id INT, -- Mã người dùng (khóa ngoại từ bảng users)
+    make VARCHAR(255), -- Hãng xe
+    model VARCHAR(255), -- Dòng xe
+    version VARCHAR(255), -- Phiên bản
+    year INT, -- Năm sản xuất
+    mileage INT, -- Số KM (sử dụng kiểu dữ liệu TEXT cho phép nhập dữ liệu độ dài lớn)
+    phone VARCHAR(20), -- Số điện thoại
+    posted_date DATE, -- Ngày đăng thông tin
+    FOREIGN KEY (user_id) REFERENCES users(id) -- Liên kết với bảng users
 );
--- Bảng admin
+
+-- Bảng thông tin admin (admins)
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE,
-    password VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    full_name VARCHAR(255),
-    date_of_birth DATE,
-    role ENUM('admin', 'editor') DEFAULT 'admin'
+    username VARCHAR(50) UNIQUE, -- Tên đăng nhập (duy nhất)
+    password VARCHAR(255), -- Mật khẩu
+    email VARCHAR(255) UNIQUE, -- Địa chỉ email (duy nhất)
+    full_name VARCHAR(255), -- Họ và tên đầy đủ của admin
+    date_of_birth DATE, -- Ngày sinh
+    role ENUM('admin', 'editor') DEFAULT 'admin' -- Vai trò của admin (admin hoặc editor)
 );

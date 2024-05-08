@@ -19,7 +19,7 @@ $result = $conn->query($sql);
 
 <body>
     <div class="container">
-        <h2 style="margin-bottom: 30px;">Quản Lý Người Bán Xe</h2>
+        <h2 style="margin-bottom: 30px;">Quản Lý đối tác của carbuydi</h2>
         <table class="table-data">
             <thead>
                 <tr>
@@ -28,7 +28,6 @@ $result = $conn->query($sql);
                     <th>Công Ty</th>
                     <th>Số Điện Thoại</th>
                     <th>Địa chỉ</th>
-                    <th>Hình Ảnh</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -45,7 +44,6 @@ $result = $conn->query($sql);
                         echo "<td>" . $row['company_name'] . "</td>";
                         echo "<td>" . $row['phone'] . "</td>";
                         echo "<td>" . $row['address'] . "</td>";
-                        echo "<td><img src='" . $row['image_url'] . "' alt='Car Image' style='width: 100px; height: auto;'></td>";
                         echo "<td>";
                         echo "<a href='index.php?quanly=Sellers-delete&id=" . $row["id"] . "' class='btn-delete'>Xóa</a>";
                         echo "<a href='index.php?quanly=Sellers-view&id=" . $row["id"] . "' class='btn-view'>Xem</a>";
@@ -56,7 +54,7 @@ $result = $conn->query($sql);
                     // Hiển thị thông báo nếu không có dữ liệu nào
                     echo "<tr><td colspan='7'>Không có người bán xe nào được tìm thấy</td></tr>";
                 }
-                // Đóng kết nối
+                // Đóng kết nối 
                 $conn->close();
                 ?>
             </tbody>

@@ -26,7 +26,24 @@
     width: 1090px;
     /* border-radius: 5px; */
 }
+.prevBtn,
+.nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #fff; /* Màu nền */
+    border: 1px solid #ccc; /* Viền */
+    padding: 5px 10px; /* Khoảng cách nội dung với viền */
+    cursor: pointer; /* Con trỏ chuột */
+}
 
+.prevBtn {
+    left: 10px; /* Vị trí bên trái */
+}
+
+.nextBtn {
+    right: 10px; /* Vị trí bên phải */
+}
 .btn-clen button {
     margin: 15px 0;
     outline: none;
@@ -135,6 +152,7 @@
 .products {
     width: 340px;
     height: 400px;
+    margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }

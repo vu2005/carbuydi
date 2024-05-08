@@ -1,24 +1,22 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "carbuydi";
-
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối không thành công: " . $conn->connect_error);
-}
-// Truy vấn để lấy tất cả các sản phẩm
-$sql = "SELECT cars.*, cars_image.*
-FROM cars
-JOIN cars_image ON cars.id = cars_image.car_id;
-";
+require_once('../config/config.php');
+$sql = "SELECT cars.*,
+ cars_details.transmission,
+ cars_details.title AS car_title,
+ cars_image.products_image,
+ cars_image.front_image,
+ cars_image.rear_image, 
+ cars_image.left_image, 
+ cars_image.right_image, 
+ cars_image.dashboard_image, 
+ cars_image.inspection_image, 
+ cars_image.other_image, 
+ sellers_car.address 
+        FROM cars 
+        LEFT JOIN cars_details ON cars.id = cars_details.car_id 
+        LEFT JOIN cars_image ON cars.id = cars_image.car_id 
+        LEFT JOIN sellers_car ON cars.id = sellers_car.id";
 $result = $conn->query($sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -67,12 +65,11 @@ $result = $conn->query($sql);
                         echo "<td>" . $row['mileage'] . "</td>";
                         echo "<td>" . $row['price'] . "</td>";
                         echo "<td>"; // Bắt đầu của cột hình ảnh
-                        $images = explode(",", $row['image_url']); // Chia chuỗi các đường dẫn thành mảng
+                        $images = explode(",", $row['front_image']); // Chia chuỗi các đường dẫn thành mảng
                         foreach ($images as $image) {
                             echo "<img src='" . $image . "' width='100' height='100' style='margin-right: 5px;'>"; // Hiển thị mỗi hình ảnh
                         }
                         echo "</td>"; // Kết thúc cột hình ảnh
-
                         echo "<td>";
                         echo "<a href='index.php?quanly=Products-view&id=" . $row["id"] . "' class='btn-view'>Xem</a>";
                         echo "<a href='index.php?quanly=Products-edit&id=" . $row["id"] . "' class='btn-edit'>Sửa</a>";

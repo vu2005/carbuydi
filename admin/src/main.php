@@ -14,12 +14,14 @@
             include("Products/Products.php");
         } else if ($tam == "Order") {
             include("Order/Order.php");
-        } else if ($tam == "FedsBack") {
-            include("FedsBack/FedsBack.php");
-        } else if ($tam == "FedsBacks-delete") {
-            include("FedsBack/Delete.fedsback.php");
+        } else if ($tam == "AccountCustomer") {
+            include("AccountCustomer/AccountCustomer.php");
+        } else if ($tam == "AccountCustomer-delete") {
+            include("AccountCustomer/Delete.account.php");
         } else if ($tam == "Customer") {
             include("Customer/Customer.php");
+        } else if ($tam == "Customer-delete") {
+            include("Customer/Delete.customer.php");
         } else if ($tam == "Details") {
             include("Details/Details.php");
         } else if ($tam == "Admin") {

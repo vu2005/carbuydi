@@ -1,7 +1,140 @@
-<?php require_once '../config/config.php';
+<?php
+require_once '../config/config.php';
 
+// Kiểm tra nếu biểu mẫu đã được gửi đi
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Kết nối đến cơ sở dữ liệu
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
+    // Kiểm tra kết nối
+    if ($conn->connect_error) {
+        die("Kết nối thất bại: " . $conn->connect_error);
+    }
+
+    // Bắt đầu một giao dịch
+    $conn->begin_transaction();
+
+    try {
+        // Thêm dữ liệu vào bảng cars
+        $sql = "INSERT INTO cars (make, model, version, year, `condition`, mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "sssisdi",
+            $_POST['make'],
+            $_POST['model'],
+            $_POST['version'],
+            $_POST['year'],
+            $_POST['condition'],
+            $_POST['mileage'],
+            $_POST['price']
+        );
+        $stmt->execute();
+
+        // Lấy ID của dòng vừa chèn vào bảng cars
+        $car_id = $stmt->insert_id;
+
+        // Thêm dữ liệu vào bảng cars_details
+        $sql = "INSERT INTO cars_details (car_id, title, description, transmission, origin, body_style, color, fuel_type, engine_capacity, seats) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "isssssssdi",
+            $car_id,
+            $_POST['title'],
+            $_POST['description'],
+            $_POST['transmission'],
+            $_POST['origin'],
+            $_POST['body_style'],
+            $_POST['color'],
+            $_POST['fuel_type'],
+            $_POST['engine_capacity'],
+            $_POST['seats']
+        );
+        $stmt->execute();
+
+        // Thêm dữ liệu vào bảng cars_image
+        $sql = "INSERT INTO cars_image (car_id, products_image, front_image, rear_image, left_image, right_image, dashboard_image, inspection_image, other_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $products_image = uploadImage($_FILES['products_image']);
+        $front_image = uploadImage($_FILES['front_image']);
+        $rear_image = uploadImage($_FILES['rear_image']);
+        $left_image = uploadImage($_FILES['left_image']);
+        $right_image = uploadImage($_FILES['right_image']);
+        $dashboard_image = uploadImage($_FILES['dashboard_image']);
+        $inspection_image = uploadImage($_FILES['inspection_image']);
+        $other_image = uploadImage($_FILES['other_image']);
+        $stmt->bind_param(
+            "issssssss",
+            $car_id,
+            $products_image,
+            $front_image,
+            $rear_image,
+            $left_image,
+            $right_image,
+            $dashboard_image,
+            $inspection_image,
+            $other_image
+        );
+
+        $stmt->execute();
+
+        // Lấy car_id từ bảng cars_details
+        $sql_car_id = "SELECT id FROM cars ORDER BY id DESC LIMIT 1"; // Lấy ID của xe vừa thêm vào
+        $result_car_id = $conn->query($sql_car_id);
+        $row_car_id = $result_car_id->fetch_assoc();
+        $car_id = $row_car_id['id'];
+
+        // Chuẩn bị posted_date và company_name
+        $posted_date = !empty($_POST['posted_date']) ? $_POST['posted_date'] : date("Y-m-d H:i:s");
+        $company_name = !empty($_POST['company_name']) ? $_POST['company_name'] : "Đang cập nhật";
+
+        // Thêm dữ liệu vào bảng sellers_car
+        $sql = "INSERT INTO sellers_car (name, company_name, province, address, phone, district, posted_date, car_id, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "sssssssis",
+            $_POST['name'],
+            $company_name,
+            $_POST['province'],
+            $_POST['address'],
+            $_POST['phone'],
+            $_POST['district'],
+            $posted_date,
+            $car_id,
+            $_POST['image_url']
+        );
+        $stmt->execute();
+
+        // Commit giao dịch
+        $conn->commit();
+
+        // Thông báo thành công
+        echo '<div class="toast success">';
+        echo '<i class="fa-solid fa-circle-check"></i>';
+        echo '<span class="msg">Đăng tin thành công!</span>';
+        echo '</div>';
+    } catch (Exception $e) {
+        // Rollback giao dịch nếu có lỗi xảy ra
+        $conn->rollback();
+        echo "Lỗi: " . $e->getMessage();
+    }
+
+    // Đóng kết nối
+    $conn->close();
+}
+
+// Hàm xử lý tải lên ảnh và trả về đường dẫn
+function uploadImage($file)
+{
+    if (isset($file['name']) && !empty($file['name'])) {
+        $target_dir = "../assets/images/"; // Thư mục lưu trữ ảnh
+        $target_file = $target_dir . basename($file["name"]);
+        move_uploaded_file($file["tmp_name"], $target_file);
+        return $target_file;
+    }
+    return null;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,8 +195,7 @@
             </div>
         </div>
 
-        <form action="">
-
+        <form id="#" action="#" method="POST" enctype="multipart/form-data">
             <div class="post-main">
                 <div class="post-1 tabcontent" id="tab1" style="display: none;">
                     <h2>Bạn đang bán xe gì?</h2>
@@ -86,13 +218,14 @@
                         </div>
                         <div class="form-group">
                             <label for="model">Dòng xe:</label>
-                            <select id="model" name="model">
+                            <select id="model" name="model" required>
                                 <option value="" selected disabled>Chọn dòng xe</option>
+                                <!-- Các tùy chọn dòng xe -->
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="version">Phiên bản:</label>
-                            <select id="version " name="version ">
+                            <select id="version" name="version">
                                 <option value="" selected disabled hidden>Chọn phiên bản xe</option>
                                 <option value="Cao cấp">Cao cấp</option>
                                 <option value="Nâng cao">Nâng cao</option>
@@ -118,7 +251,7 @@
                         </div>
                         <div class="form-group">
                             <label for="condition">Tình trạng:</label>
-                            <select id="condition " name="condition ">
+                            <select id="condition" name="condition">
                                 <option value="" selected disabled hidden>Chọn tình trạng xe</option>
                                 <option value="Mới">Mới</option>
                                 <option value="Cũ">Cũ</option>
@@ -132,7 +265,7 @@
                             <label for="price">Giá muốn bán:
                                 <div id="result" style="margin: 0 5px;"></div>
                             </label>
-                            <input type="text" id="price" oninput="handleInput()" />
+                            <input type="text" id="price" name="price" oninput="handleInput()" />
                         </div>
                         <div class="control button" onclick="nextTab('tab1')">Tiếp tục</div>
                         <script>
@@ -167,7 +300,7 @@
                             }
                         </script>
                         <script>
-                            var modelData = {
+                            var model = {
                                 "Toyota": ["Camry", "Corolla", "RAV4", "Highlander", "Tacoma", "Prius", "Sienna", "4Runner"],
                                 "Honda": ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "HR-V", "Fit", "Ridgeline"],
                                 "Mercedes-Benz": ["C-Class", "E-Class", "S-Class", "GLC-Class", "GLE-Class", "GLS-Class", "A-Class", "CLA-Class"],
@@ -185,7 +318,7 @@
 
                             makeSelect.addEventListener('change', function() {
                                 var selectedmake = makeSelect.value;
-                                var modelArray = modelData[selectedmake] || [];
+                                var modelArray = model[selectedmake] || [];
 
                                 // Xóa tất cả các tùy chọn cũ trước khi cập nhật
                                 modelSelect.innerHTML = '<option value="" selected disabled>Chọn dòng xe</option>';
@@ -208,7 +341,7 @@
                             <div class="form-1">
                                 <div class="form-group">
                                     <label for="transmission">Hộp số:</label>
-                                    <select id="condition " name="condition ">
+                                    <select id="transmission" name="transmission">
                                         <option value="" selected disabled hidden>Chọn hộp số</option>
                                         <option value="Mới">Số sàn</option>
                                         <option value="Cũ">Số tự động</option>
@@ -222,7 +355,7 @@
 
                                 <div class="form-group">
                                     <label for="body_style">Kiểu dáng:</label>
-                                    <select id="condition" name="condition">
+                                    <select id="body_style" name="body_style">
                                         <option value="" selected disabled hidden>Chọn kiểu dáng</option>
                                         <option value="Coupe">Coupe</option>
                                         <option value="Wagon">Wagon</option>
@@ -238,18 +371,33 @@
 
                                 <div class="form-group">
                                     <label for="color">Màu sắc:</label>
-                                    <select id="condition " name="condition ">
-                                        <option value="" selected disabled hidden>Chọn tình trạng xe</option>
-                                        <option value="Mới">Mới</option>
-                                        <option value="Cũ">Cũ</option>
+                                    <select id="color" name="color">
+                                        <option value="" selected disabled hidden>Chọn màu xe</option>
+                                        <option value="Đen">Đen</option>
+                                        <option value="Đỏ">Đỏ</option>
+                                        <option value="Vàng">Vàng</option>
+                                        <option value="Trắng">Trắng</option>
+                                        <option value="Nâu">Nâu</option>
+                                        <option value="Cam">Cam</option>
+                                        <option value="Bạc">Bạc</option>
+                                        <option value="Xám">Xám</option>
+                                        <option value="Vàng đồng">Vàng đồng</option>
+                                        <option value="Xanh dương">Xanh dương</option>
+                                        <option value="Xanh lá cây">Xanh lá cây</option>
+                                        <option value="Tím">Tím</option>
+                                        <option value="Hồng">Hồng</option>
+                                        <option value="Đồng">Đồng</option>
+                                        <option value="Vàng cát">Vàng cát</option>
+                                        <option value="Cam đất">Cam đất</option>
+
                                     </select>
                                 </div>
 
                             </div>
                             <div class="form-2">
                                 <div class="form-group">
-                                    <label for="fuel">Nhiên liệu:</label>
-                                    <select name="" id="">
+                                    <label for="fuel_type">Nhiên liệu:</label>
+                                    <select name="fuel_type" id="fuel_type">
                                         <option value="Gas">Gas</option>
                                         <option value="Gas">Xăng</option>
                                         <option value="Gas">Dầu</option>
@@ -257,12 +405,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="engine">Dung tích động cơ (lít):</label>
-                                    <input type="text" id="engine" name="engine" value="0">
+                                    <label for="engine_capacity">Dung tích động cơ (lít):</label>
+                                    <input type="text" id="engine_capacity" name="engine_capacity">
                                 </div>
                                 <div class="form-group">
                                     <label for="seats">Số ghế:</label>
-                                    <select name="" id="">
+                                    <select name="seats" id="seats">
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                         <option value="6">6</option>
@@ -291,7 +439,6 @@
                 <div class="post-3 tabcontent" style="display: none;" id="tab3">
                     <h2>Hình ảnh xe</h2>
                     <div style="margin: 0 auto;" class="form">
-                        <!-- Thêm input cho ảnh trước xe -->
                         <div class="form-group-img">
                             <label for="front_image">Ảnh trước xe</label>
                             <div id="front_image_container" class="image-container" onclick="handleImageUpload('front_image_container', 'front_image')">
@@ -299,7 +446,6 @@
                             </div>
                             <input type="file" id="front_image" name="front_image" style="display: none" />
                         </div>
-
                         <!-- Thêm input cho ảnh sau xe -->
                         <div class="form-group-img">
                             <label for="rear_image">Ảnh sau xe</label>
@@ -308,7 +454,6 @@
                             </div>
                             <input type="file" id="rear_image" name="rear_image" style="display: none" />
                         </div>
-
                         <!-- Thêm input cho ảnh bên trái xe -->
                         <div class="form-group-img">
                             <label for="left_image">Ảnh bên trái xe</label>
@@ -387,8 +532,8 @@
                             <div class="form-1">
                                 <div class="form-group">
                                     <input type="hidden" name="id">
-                                    <label for="full_name">Họ tên:</label>
-                                    <input type="text" id="full_name" name="full_name">
+                                    <label for="name">Họ tên:</label>
+                                    <input type="text" id="name" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label for="province">Tỉnh/ Thành phố:</label>

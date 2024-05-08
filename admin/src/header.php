@@ -1,9 +1,10 @@
 <div class="admin-header" style="margin: 0 60px;">
     <div class="admin-1">
+        <button style="display: flex;">
+            <i class='bx bx-menu'></i>
+        </button>
 
-        <i class='bx bx-menu'></i>
         <p>Hệ Thống Quản Lý</p>
-
     </div>
     <div class="admin-1">
         <div class="admin-1-search">

@@ -30,18 +30,17 @@ $result = $conn->query($sql);
 
 <body>
     <div class="container">
-        <h2 style="margin-bottom: 30px;">Quản lý khách hàng</h2>
+        <h2 style="margin-bottom: 30px;">Quản Lý Thông Tin Khách Hàng</h2>
         <table class="table-data">
             <thead>
                 <tr>
                     <th>Mã</th>
-                    <th>Tên đăng nhập</th>
-                    <th>Email</th>
-                    <th>Password</th>
+                    <th>Họ Tên</th>
                     <th>Số điện thoại</th>
-                    <th>Địa chỉ</th>
-                    <th>Ngày sinh</th>
-                    <th>Action</th>
+                    <th>Địa Chỉ</th>
+                    <th>Tỉnh/ Thành phố</th>
+                    <th>Quận/ Huyện</th>
+                    <th>Hành Động</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,13 +52,11 @@ $result = $conn->query($sql);
                         // Hiển thị thông tin người dùng trong từng hàng của bảng
                         echo "<tr>";
                         echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['username'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['password'] . "</td>";
-
-                        echo "<td>" . $row['phone'] . "</td>";
+                        echo "<td>" . $row['full_name'] . "</td>";
+                        echo "<td>" . $row['phone_number'] . "</td>";
                         echo "<td>" . $row['address'] . "</td>";
-                        echo "<td>" . $row['date_of_birth'] . "</td>";
+                        echo "<td>" . $row['province'] . "</td>";
+                        echo "<td>" . $row['district'] . "</td>";
                         echo "<td>";
                         echo "<a href='index.php?quanly=Users-delete&id=" . $row["id"] . "' class='btn-delete'>Xóa</a>";
                         echo "</td>";

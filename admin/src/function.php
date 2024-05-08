@@ -1,4 +1,4 @@
-<div class="admin-main">
+<div class="admin-main" >
     <div class="admin-box3">
         <a href="index.php">
             <i class='bx bx-border-all'></i>
@@ -11,10 +11,10 @@
             <p>Quản Lý Sản Phẩm</p><i class='bx bx-chevron-down'></i>
             <div class="admin-nav">
                 <ul><a href="index.php?quanly=Products">
-                        <li>Products</li>
+                        <li>Sản Phẩm</li>
                     </a>
                     <a href="index.php?quanly=Sellers">
-                        <li>List of car sellers</li>
+                        <li>Danh sách đối tác</li>
                     </a>
                 </ul>
             </div>
@@ -32,10 +32,10 @@
             <p>Quản Lý Khách Hàng</p><i class='bx bx-chevron-down'></i>
             <div class="admin-nav">
                 <ul><a href="index.php?quanly=Customer">
-                        <li>List of car sales customers</li>
+                        <li>Danh sách khách hàng bán xe</li>
                     </a>
-                    <a href="index.php?quanly=FedsBack">
-                        <li>FedsBack User</li>
+                    <a href="index.php?quanly=AccountCustomer">
+                        <li>Danh sách tài khoản của khách hàng</li>
                     </a>
                 </ul>
             </div>
