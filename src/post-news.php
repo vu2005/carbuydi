@@ -52,9 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
 
         // Thêm dữ liệu vào bảng cars_image
-        $sql = "INSERT INTO cars_image (car_id, products_image, front_image, rear_image, left_image, right_image, dashboard_image, inspection_image, other_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO cars_image (car_id, front_image, rear_image, left_image, right_image, dashboard_image, inspection_image, other_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $products_image = uploadImage($_FILES['products_image']);
         $front_image = uploadImage($_FILES['front_image']);
         $rear_image = uploadImage($_FILES['rear_image']);
         $left_image = uploadImage($_FILES['left_image']);
@@ -63,9 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inspection_image = uploadImage($_FILES['inspection_image']);
         $other_image = uploadImage($_FILES['other_image']);
         $stmt->bind_param(
-            "issssssss",
+            "isssssss",
             $car_id,
-            $products_image,
             $front_image,
             $rear_image,
             $left_image,
@@ -76,7 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
 
         $stmt->execute();
-
         // Lấy car_id từ bảng cars_details
         $sql_car_id = "SELECT id FROM cars ORDER BY id DESC LIMIT 1"; // Lấy ID của xe vừa thêm vào
         $result_car_id = $conn->query($sql_car_id);
@@ -343,8 +340,8 @@ function uploadImage($file)
                                     <label for="transmission">Hộp số:</label>
                                     <select id="transmission" name="transmission">
                                         <option value="" selected disabled hidden>Chọn hộp số</option>
-                                        <option value="Mới">Số sàn</option>
-                                        <option value="Cũ">Số tự động</option>
+                                        <option value="Số sàn">Số sàn</option>
+                                        <option value="Số tự động">Số tự động</option>
                                     </select>
                                 </div>
 

@@ -44,25 +44,23 @@
 .nextBtn {
     right: 10px; /* Vị trí bên phải */
 }
-.btn-clen button {
-    margin: 15px 0;
+.btn-removeAll {
+    margin: 5px 0;
     outline: none;
+    color: #1a6fb7;
     border: none;
     font-weight: 500;
     font-size: 18px;
+    padding: 8px;
     background: #fff;
+    cursor: pointer;
     font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
         sans-serif;
 }
-.btn-clen button :hover {
+.btn-removeAll:hover {
     border-radius: 7px;
     transition: 0.3s ease-in-out;
     background: #ebf6f8e9;
-}
-.btn-clen button a {
-    color: #1a6fb7;
-    text-decoration: none;
-    padding: 7px;
 }
 .icon-search i {
     margin: 18px 10px;
@@ -72,6 +70,27 @@
     border-radius: 5px;
     display: flex;
     align-items: center; /* Canh chỉnh input với button */
+}
+.list-tag {
+    width: 300px;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    display: flex;
+}
+.list-tag > li {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    background: #ebf6f8e9;
+}
+.list-tag > li > i {
+    font-size: 25px;
+    position: relative;
+    cursor: pointer;
+    color: #1a6fb7;
 }
 
 .list-button h4 {

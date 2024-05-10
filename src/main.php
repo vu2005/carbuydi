@@ -1,31 +1,67 @@
 <?php
 require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
-
 ?>
 <div class="body-all">
     <div class="body-main">
         <?php
         require_once("function.php");
         ?>
-
-
         <div class="body-search" style="max-width: 1090px;">
-            <div class="body-input">
-                <div class="icon-search"><i class='bx bx-search'></i></div>
-
-                <input type="text" list="items" placeholder="Tìm kiếm xe theo hãng xe, Dòng xe hoặc từ khóa ">
-                <datalist id="items">
-                    <option value="Lamborghini">Lamborghini</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Kia">Kia</option>
-                    <option value="VinFast">VinFast</option>
-                </datalist>
+            <div class="list-tags">
+                <div class="body-input">
+                    <div class="icon-search"><i class='bx bx-search'></i></div>
+                    <input type="text" id="inputItems" placeholder="Tìm kiếm xe theo hãng xe, Dòng xe hoặc từ khóa ">
+                </div>
+                <ul class="list-tag" id="tags"></ul>
+                <button class="btn-removeAll">BỎ lỌC</button>
             </div>
 
-            <div class="btn-clen">
-                <button class="btn-function"><a href="index.php">BỎ LỌC</a></button>
-            </div>
+            <script>
+                const ul = document.getElementById("tags"),
+                    input = document.getElementById("inputItems");
+
+                let tags = [];
+
+                function createTag(tag) {
+                    const liTag = document.createElement("li");
+                    liTag.textContent = tag;
+
+                    const removeIcon = document.createElement("i");
+                    removeIcon.classList.add("bx", "bx-x");
+                    removeIcon.onclick = function() {
+                        removeTag(liTag);
+                    };
+
+                    liTag.appendChild(removeIcon);
+                    ul.appendChild(liTag);
+                }
+
+
+                function removeTag(tagElement) {
+                    const index = Array.from(ul.children).indexOf(tagElement);
+                    tags.splice(index, 1);
+                    tagElement.remove();
+                }
+
+                function addTag(e) {
+                    if (e.key == "Enter") {
+                        const tag = e.target.value.trim();
+                        if (tag !== "" && !tags.includes(tag)) {
+                            tags.push(tag);
+                            createTag(tag);
+                            e.target.value = ""; // Xóa nội dung sau khi thêm tag
+                        }
+                    }
+                }
+
+                input.addEventListener("keyup", addTag);
+
+                const removeBtn = document.querySelector(".btn-removeAll");
+                removeBtn.addEventListener("click", () => {
+                    tags = [];
+                    ul.innerHTML = ""; // Xóa tất cả các tag
+                });
+            </script>
             <div class="text-typing">
                 <h1>Carbuydi.vn-Mua Bán Xe Hơi Toàn Quốc</h1>
                 <button class="btn-function">
@@ -92,68 +128,68 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
                     }
                 }
             </style>
-                <?php
-                include_once("function.php");
-                ?>
-                <?php
-                if (isset($_GET["select"])) {
-                    $tam = $_GET["select"];
-                } else {
-                    $tam = "";
-                }
-                if ($tam == "Toyota") {
-                    include("Toyota.php");
-                } else if ($tam == "Honda") {
-                    include("Honda.php");
-                } else if ($tam == "Mercedes-Benz") {
-                    include("Mercedes-Benz.php");
-                } else if ($tam == "Ford") {
-                    include("Ford.php");
-                } else if ($tam == "BMW") {
-                    include("BMW.php");
-                } else if ($tam == "Chevrolet") {
-                    include("Chevrolet.php");
-                } else if ($tam == "Hyundai") {
-                    include("Hyundai.php");
-                } else if ($tam == "Kia") {
-                    include("Kia.php");
-                } else if ($tam == "Mazda") {
-                    include("Mazda.php");
-                } else if ($tam == "VinFast") {
-                    include("VinFast.php");
-                } else if ($tam == "Mercedes-Benz-GL-Class") {
-                    include("Mercedes-Benz-GL-Class.php");
-                } else if ($tam == "Mercedes-Benz-E-Class") {
-                    include("Mercedes-Benz-E-Class.php");
-                } else if ($tam == "Mitsubishi-Xpander-Cross") {
-                    include("Mitsubishi-Xpander-Cross.php");
-                } else if ($tam == "Toyota-Fortuner") {
-                    include("Toyota-Fortuner.php");
-                } else if ($tam == "Mercedes-Benz-S-Class") {
-                    include("Mercedes-Benz-S-Class.php");
-                } else if ($tam == "Mercedes-Benz-C-Class") {
-                    include("Mercedes-Benz-C-Class.php");
-                } else if ($tam == "Hyundai-Santafe") {
-                    include("Hyundai-Santafe.php");
-                } else if ($tam == "Toyota-Corolla-Cross") {
-                    include("Toyota-Corolla-Cross.php");
-                } else if ($tam == "Ford-Everest") {
-                    include("Ford-Everest.php");
-                } else if ($tam == "Toyota-Vios") {
-                    include("Toyota-Vios.php");
-                } else if ($tam == "Duoi-500-tr") {
-                    include("Duoi-500-tr.php");
-                } else if ($tam == "500-700tr") {
-                    include("500-700tr.php");
-                } else if ($tam == "700-1t") {
-                    include("700-1t.php");
-                } else if ($tam == "tren1t") {
-                    include("tren1t.php");
-                } else {
-                    include("products.php");
-                }
+            <?php
+            include_once("function.php");
+            ?>
+            <?php
+            if (isset($_GET["select"])) {
+                $tam = $_GET["select"];
+            } else {
+                $tam = "";
+            }
+            if ($tam == "Toyota") {
+                include("Toyota.php");
+            } else if ($tam == "Honda") {
+                include("Honda.php");
+            } else if ($tam == "Mercedes-Benz") {
+                include("Mercedes-Benz.php");
+            } else if ($tam == "Ford") {
+                include("Ford.php");
+            } else if ($tam == "BMW") {
+                include("BMW.php");
+            } else if ($tam == "Chevrolet") {
+                include("Chevrolet.php");
+            } else if ($tam == "Hyundai") {
+                include("Hyundai.php");
+            } else if ($tam == "Kia") {
+                include("Kia.php");
+            } else if ($tam == "Mazda") {
+                include("Mazda.php");
+            } else if ($tam == "VinFast") {
+                include("VinFast.php");
+            } else if ($tam == "Mercedes-Benz-GL-Class") {
+                include("Mercedes-Benz-GL-Class.php");
+            } else if ($tam == "Mercedes-Benz-E-Class") {
+                include("Mercedes-Benz-E-Class.php");
+            } else if ($tam == "Mitsubishi-Xpander-Cross") {
+                include("Mitsubishi-Xpander-Cross.php");
+            } else if ($tam == "Toyota-Fortuner") {
+                include("Toyota-Fortuner.php");
+            } else if ($tam == "Mercedes-Benz-S-Class") {
+                include("Mercedes-Benz-S-Class.php");
+            } else if ($tam == "Mercedes-Benz-C-Class") {
+                include("Mercedes-Benz-C-Class.php");
+            } else if ($tam == "Hyundai-Santafe") {
+                include("Hyundai-Santafe.php");
+            } else if ($tam == "Toyota-Corolla-Cross") {
+                include("Toyota-Corolla-Cross.php");
+            } else if ($tam == "Ford-Everest") {
+                include("Ford-Everest.php");
+            } else if ($tam == "Toyota-Vios") {
+                include("Toyota-Vios.php");
+            } else if ($tam == "Duoi-500-tr") {
+                include("Duoi-500-tr.php");
+            } else if ($tam == "500-700tr") {
+                include("500-700tr.php");
+            } else if ($tam == "700-1t") {
+                include("700-1t.php");
+            } else if ($tam == "tren1t") {
+                include("tren1t.php");
+            } else {
+                include("products.php");
+            }
 
-                ?>
+            ?>
         </div>
     </div>
     <?php

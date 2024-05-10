@@ -32,7 +32,6 @@ CREATE TABLE cars_image (
     id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT,
     shop_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xecars_image
-    products_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xecars_image
     front_image VARCHAR(255), -- Đường dẫn đến ảnh trước xe
     rear_image VARCHAR(255), -- Đường dẫn đến ảnh sau xe
     left_image VARCHAR(255), -- Đường dẫn đến ảnh bên trái xe

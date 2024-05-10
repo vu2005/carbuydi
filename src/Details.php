@@ -9,7 +9,6 @@ if (isset($_GET['id'])) {
 
     // Truy vấn thông tin xe từ bảng cars và các bảng liên quan
     $sql = "SELECT cars.*, cars_details.*, sellers_car.*, 
-            cars_image.products_image,
             cars_image.front_image,
             cars_image.rear_image, 
             cars_image.left_image, 
@@ -39,7 +38,7 @@ if (isset($_GET['id'])) {
         $fuel_type = $row['fuel_type'];
         $body_style = $row['body_style'];
         $color = $row['color'];
-        $location = $row['address']; // Địa chỉ của người bán
+        $address = $row['address']; // Địa chỉ của người bán
         $seller_name = $row['name']; // Tên người bán
         $seller_phone = $row['phone']; // Số điện thoại người bán
     } else {
@@ -86,7 +85,7 @@ if (isset($_GET['id'])) {
                                 <i class="bx bx-chevron-right"></i>
                             </span>
                             <div class="img-wrap">
-                                <img src="<?php echo $row['products_image']; ?>" alt="" />
+                                <img src="<?php echo $row['front_image']; ?>" alt="" />
                             </div>
                             <p class="quantity-img">1/8</p>
                         </div>
@@ -94,9 +93,6 @@ if (isset($_GET['id'])) {
                             <div class="max-w830">
                                 <div class="details-list-img">
                                     <div class="active">
-                                        <img src="<?php echo $row['products_image']; ?>" alt="" />
-                                    </div>
-                                    <div>
                                         <img src="<?php echo $row['front_image']; ?>" alt="" />
                                     </div>
                                     <div>
@@ -321,7 +317,7 @@ if (isset($_GET['id'])) {
                             <i class='bx bx-git-pull-request'></i>
                             <p>Hộ số</p>
                         </div>
-                        <span><?php echo $transmission ?></span>
+                        <span><?php echo $row['transmission'] ?></span>
                     </div>
                     <div style="border-top: 1px solid #808080; margin: 20px;"></div>
                     <div class="details-2">
@@ -329,7 +325,7 @@ if (isset($_GET['id'])) {
                             <i class='bx bx-map'></i>
                             <p>Vị trí</p>
                         </div>
-                        <span><?php echo $location ?></span>
+                        <span><?php echo $row['address'] ?></span>
                     </div>
 
                     <div class="details-2">
@@ -337,7 +333,7 @@ if (isset($_GET['id'])) {
                             <i class='bx bx-user-circle'></i>
                             <p>Đăng bởi</p>
                         </div>
-                        <span><?php echo $seller_name ?></span>
+                        <span><?php echo $row['name'] ?></span>
                     </div>
                     <div class="details-2">
                         <button class="details-3" id="callSeller"><i class='bx bx-phone-call'></i>Gọi người bán</button>

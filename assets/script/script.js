@@ -161,3 +161,35 @@ function toggleDisplay(element) {
         element.style.display = "block";
     }
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInputs = document.querySelectorAll(
+        '.function-search input[type="text"]'
+    );
+
+    searchInputs.forEach(function (input) {
+        input.addEventListener("input", function (event) {
+            const searchText = event.target.value.trim().toLowerCase();
+            const functionBox = input
+                .closest(".function-nav")
+                .querySelector(".function-box");
+
+            const locations = functionBox.querySelectorAll(
+                "p.location-make, p.location-address"
+            );
+
+            locations.forEach(function (location) {
+                const listItem = location.closest("li");
+                if (
+                    location.textContent
+                        .trim()
+                        .toLowerCase()
+                        .includes(searchText)
+                ) {
+                    listItem.style.display = ""; // Show matching item
+                } else {
+                    listItem.style.display = "none"; // Hide non-matching item
+                }
+            });
+        });
+    });
+});

@@ -20,22 +20,32 @@ echo "<p class='total-cars'>Tổng số lượng xe: " . $total_cars . "</p>";
 echo "<div class='products-sp'>"; // Mở thẻ cha products-sp ở đây
 
 // Truy vấn dữ liệu sản phẩm từ các bảng cars, cars_details, cars_image và sellers_car
-$sql = "SELECT cars.*,
- cars_details.transmission,
- cars_details.title AS car_title,
- cars_image.products_image,
- cars_image.front_image,
- cars_image.rear_image, 
- cars_image.left_image, 
- cars_image.right_image, 
- cars_image.dashboard_image, 
- cars_image.inspection_image, 
- cars_image.other_image, 
- sellers_car.address 
-        FROM cars 
-        LEFT JOIN cars_details ON cars.id = cars_details.car_id 
-        LEFT JOIN cars_image ON cars.id = cars_image.car_id 
-        LEFT JOIN sellers_car ON cars.id = sellers_car.id";
+// Truy vấn dữ liệu sản phẩm từ các bảng cars, cars_details, cars_image và sellers_car
+$sql = "
+SELECT 
+    c.id,
+    c.make,
+    c.model,
+    c.year,
+    c.mileage,
+    c.price,
+    cd.title AS car_title,
+    cd.transmission,
+    cd.fuel_type,
+    ci.front_image,
+    ci.rear_image,
+    ci.left_image,
+    ci.right_image,
+    ci.dashboard_image,
+    ci.inspection_image,
+    ci.other_image,
+    sc.address
+FROM cars c
+INNER JOIN cars_details cd ON c.id = cd.car_id
+INNER JOIN cars_image ci ON c.id = ci.car_id
+INNER JOIN sellers_car sc ON c.id = sc.car_id;
+";
+
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -54,7 +64,6 @@ if ($result->num_rows > 0) {
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";
             // Hiển thị hình ảnh của sản phẩm
-            echo "<div><img src='" . $row['products_image'] . "' alt=''></div>";
             echo "<div><img src='" . $row['front_image'] . "' alt=''></div>";
             echo "<div><img src='" . $row['rear_image'] . "' alt=''></div>";
             echo "<div><img src='" . $row['left_image'] . "' alt=''></div>";
@@ -67,21 +76,21 @@ if ($result->num_rows > 0) {
             echo "</div>";
             echo "</a>";
             echo "<div class='text-products'>";
-            // Hiển thị thông tin về hãng và dòng xe
+            // Hiển thị thông tin xe
             echo "<p><i class='bx bxs-hot'></i><i id='hot' class='bx bxs-hot'></i>" . $row["make"] . " " . $row["model"] . "</p>";
             // Hiển thị tiêu đề của sản phẩm từ bảng cars_details
             echo "<p>" . $row["car_title"] . "</p>";
             echo "</div>";
             echo "<div class='icon-products'>";
             echo "<ul>";
-            // Hiển thị năm sản xuất và số KM
+            // Hiển thị năm sản xuất và Nhiên Liệu
             echo "<li><img src='../assets/images/icon1.svg' alt=''>" . $row["year"] . "</li>";
-            echo "<li><img src='../assets/images/icon2.svg' alt=''>" . $row["mileage"] . " Km</li>";
+            echo "<li><img src='../assets/images/icon2.svg' alt=''>" . $row["fuel_type"] . "</li>";
             echo "</ul>";
             echo "<ul>";
-            // Hiển thị hộp số và giá
-            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $row["transmission"] . "</li>";
-            echo "<li><img src='../assets/images/icon4.svg' alt=''>" . $row["price"] . "</li>";
+            // Hiển thị số km và hộ số
+            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $row["mileage"] . " Km</li>";
+            echo "<li><img src='../assets/images/icon4.svg' alt=''>" . $row["transmission"] . "</li>";
             echo "</ul>";
             echo "</div>";
             echo "<div class='map-products'>";
