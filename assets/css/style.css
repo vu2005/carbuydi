@@ -44,6 +44,13 @@
 .nextBtn {
     right: 10px; /* Vị trí bên phải */
 }
+.btn-function {
+    display: flex;
+}
+.btn-function > p {
+    margin-top: 3px;
+}
+
 .btn-removeAll {
     margin: 5px 0;
     outline: none;
@@ -71,8 +78,35 @@
     display: flex;
     align-items: center; /* Canh chỉnh input với button */
 }
+.list-search {
+    display: flex;
+    justify-content: space-between;
+}
+.search-btn {
+    outline: none;
+    margin-top: 15px;
+    float: right;
+    font-size: 15px;
+    align-items: center;
+    display: flex;
+    color: #1a6fb7;
+    border: none;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 7px;
+    background: #ebf6f8e9;
+    cursor: pointer;
+    font-family: "Roboto", system-u0i, "Segoe UI", "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+.search-btn:hover {
+    border-radius: 7px;
+    background: #ddf1f5e9;
+    transition: 0.3s ease-in-out;
+}
 .list-tag {
-    width: 300px;
+    width: 100%;
+    float: right;
     list-style: none;
     flex-wrap: wrap;
     margin-top: 10px;
@@ -88,8 +122,8 @@
 }
 .list-tag > li > i {
     font-size: 25px;
-    position: relative;
     cursor: pointer;
+    margin-left: 2px;
     color: #1a6fb7;
 }
 
@@ -126,7 +160,7 @@
     text-shadow: 0 0 100px #1a6fb7;
 }
 
-.text-typing button {
+.text-typing .form-select {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -134,7 +168,7 @@
     background: white;
     border: none;
 }
-.text-typing button p {
+.text-typing .form-select p {
     /* margin-right: 5px; */
     color: #3f4047;
     font-weight: 500;
@@ -142,7 +176,7 @@
         sans-serif;
     font-size: 14px;
 }
-.text-typing button span {
+.text-typing .form-select span {
     /* margin: 2px; */
     color: #1a6fb7;
     padding: 0 4px;
@@ -150,7 +184,7 @@
     font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
         sans-serif;
 }
-.text-typing button i {
+.text-typing .form-select i {
     font-size: 20px;
 }
 .in-result p {

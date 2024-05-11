@@ -4,32 +4,30 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid #adadad;
 }
-@keyframes slideDown {
-    from {
-        max-height: 0;
-    }
-    to {
-        max-height: 600px;
-    }
-}
-/* @keyframes slideClose {
-    from {
-        max-height: 600px;
-    }
-    to {
-        max-height: 0;
-    }
-} */
-.card-list-function.show {
-    animation: slideDown 1s forwards;
-}
 .card-list-function {
     overflow: hidden;
-    position: absolute; /* Đặt vị trí tuyệt đối */
+    position: absolute;
     display: none;
-    right: 50px; /* Đặt vị trí bên phải */
-    z-index: 999; /* Đảm bảo phần này nằm trên tất cả các phần khác */
+    top: 20%;
 }
+
+.show {
+    display: block;
+    z-index: 1;
+    animation: slideFromRight 0.5s forwards;
+}
+
+@keyframes slideFromRight {
+    from {
+        right: -300px; /* Bắt đầu từ vị trí bên phải ngoài màn hình */
+        opacity: 0;
+    }
+    to {
+        right: 50px; /* Di chuyển đến vị trí mong muốn */
+        opacity: 1;
+    }
+}
+
 .card-list-function-body {
     border: 1px solid #1a6fb7;
     width: 230px;
@@ -39,8 +37,8 @@
 }
 .index-fn label {
     font-size: 14px;
-    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans",
+        "Helvetica Neue", sans-serif;
     margin: 10px 0;
     font-weight: 500;
     display: flex;
@@ -50,8 +48,8 @@
     text-align: left;
     font-size: 17px;
     margin-top: 5px;
-    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: "Roboto", system-ui, "Segoe UI", "Open Sans",
+        "Helvetica Neue", sans-serif;
     font-weight: 500;
     color: #000000ed;
 }
@@ -64,7 +62,4 @@
 
 .index-fn input:checked + span {
     color: #1a6fb7; /* Tùy chỉnh màu chữ nếu muốn */
-}
-.show {
-    display: block; /* Hiển thị thẻ khi có lớp 'show' */
 }

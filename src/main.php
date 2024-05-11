@@ -7,189 +7,63 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
         require_once("function.php");
         ?>
         <div class="body-search" style="max-width: 1090px;">
-            <div class="list-tags">
-                <div class="body-input">
-                    <div class="icon-search"><i class='bx bx-search'></i></div>
-                    <input type="text" id="inputItems" placeholder="Tìm kiếm xe theo hãng xe, Dòng xe hoặc từ khóa ">
-                </div>
-                <ul class="list-tag" id="tags"></ul>
-                <button class="btn-removeAll">BỎ lỌC</button>
-            </div>
-
-            <script>
-                const ul = document.getElementById("tags"),
-                    input = document.getElementById("inputItems");
-
-                let tags = [];
-
-                function createTag(tag) {
-                    const liTag = document.createElement("li");
-                    liTag.textContent = tag;
-
-                    const removeIcon = document.createElement("i");
-                    removeIcon.classList.add("bx", "bx-x");
-                    removeIcon.onclick = function() {
-                        removeTag(liTag);
-                    };
-
-                    liTag.appendChild(removeIcon);
-                    ul.appendChild(liTag);
-                }
-
-
-                function removeTag(tagElement) {
-                    const index = Array.from(ul.children).indexOf(tagElement);
-                    tags.splice(index, 1);
-                    tagElement.remove();
-                }
-
-                function addTag(e) {
-                    if (e.key == "Enter") {
-                        const tag = e.target.value.trim();
-                        if (tag !== "" && !tags.includes(tag)) {
-                            tags.push(tag);
-                            createTag(tag);
-                            e.target.value = ""; // Xóa nội dung sau khi thêm tag
-                        }
-                    }
-                }
-
-                input.addEventListener("keyup", addTag);
-
-                const removeBtn = document.querySelector(".btn-removeAll");
-                removeBtn.addEventListener("click", () => {
-                    tags = [];
-                    ul.innerHTML = ""; // Xóa tất cả các tag
-                });
-            </script>
+            <?php
+            require_once("search.php");
+            ?>
             <div class="text-typing">
                 <h1>Carbuydi.vn-Mua Bán Xe Hơi Toàn Quốc</h1>
-                <button class="btn-function">
-                    <p>SẮP XẾP:</p><span onclick="showFunction()">Liên quan nhất </span><i class='bx bx-chevron-down'></i>
-                    <div class="card-list-function">
-                        <div class="card-list-function-body">
-                            <form action="#">
-                                <div class="index-fn">
-                                    <label for="">
-                                        <input type="radio" name="sorting" checked onclick="closeCardList()">
-                                        <span>Liên quan nhất</span>
-                                    </label>
-                                </div>
-                                <div class="index-fn">
-                                    <p>Ngày đăng</p>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Mới nhất</span></label>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Cũ nhất</span></label>
-                                </div>
-                                <div class="index-fn">
-                                    <p>Giá</p>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Tăng dần</span></label>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Giảm dần</span></label>
-                                </div>
-                                <div class="index-fn">
-                                    <p>Số km</p>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Tăng dần</span></label>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Giảm dần</span></label>
-                                </div>
-                                <div class="index-fn" style="border-bottom: none;">
-                                    <p>Năm sản xuất</p>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Mới đến cũ</span></label>
-                                    <label for=""><input type="radio" name="sorting" checked onclick="closeCardList()"><span>Cũ đến mới</span></label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </button>
 
+                <?php
+                require_once("right-filter.php");
+                ?>
             </div>
 
-            <style>
-                @keyframes typing {
-
-                    0%,
-                    100% {
-                        width: 0%;
-                    }
-
-                    70%,
-                    90% {
-                        width: 35%;
-                    }
-                }
-
-                @keyframes blink {
-
-                    0%,
-                    100% {
-                        border-right: 10px solid transparent;
-                    }
-
-                    50% {
-                        border-right: 10px solid #1a6fb7;
-                    }
-                }
-            </style>
+            
             <?php
             include_once("function.php");
             ?>
             <?php
+            // Kiểm tra xem biến $_GET["select"] đã được truyền vào hay chưa
             if (isset($_GET["select"])) {
-                $tam = $_GET["select"];
+                // Tách chuỗi $_GET["select"] thành các phần riêng biệt bằng dấu phẩy và loại bỏ khoảng trắng ở đầu và cuối chuỗi
+                $selects = array_map('trim', explode(",", $_GET["select"]));
+
+                // Nếu có nhiều hơn một lựa chọn, chuyển hướng đến trang search_multiple.php
+                if (count($selects) > 1) {
+                    include("search_multiple.php");
+                } else {
+                    // Danh sách các trang cho phép
+                    $allowedPages = array(
+                        "toyota", "honda", "mercedes-benz", "ford", "bmw", "chevrolet", "hyundai", "kia",
+                        "mazda", "vinfast", "mercedes-benz-gl-class", "mercedes-benz-e-class", "mitsubishi-xpander-cross",
+                        "toyota-fortuner", "mercedes-benz-s-class", "mercedes-benz-c-class", "hyundai-santafe",
+                        "toyota-corolla-cross", "ford-everest", "toyota-vios", "duoi-500-tr", "500-700tr", "700-1t", "tren1t", "search-cars"
+                    );
+
+                    // Kiểm tra từng phần trong danh sách các hãng xe được chọn
+                    foreach ($selects as $select) {
+                        // Chuyển đổi thành chữ thường
+                        $select = strtolower($select);
+
+                        // Kiểm tra xem trang được yêu cầu có tồn tại trong danh sách trang cho phép hay không
+                        if (in_array($select, $allowedPages)) {
+                            // Nếu trang được yêu cầu tồn tại trong danh sách trang cho phép, include trang tương ứng
+                            include("$select.php");
+                        } else {
+                            // Nếu trang không tồn tại, chuyển hướng đến trang 404.php và kết thúc vòng lặp
+                            include("404.php");
+                            break;
+                        }
+                    }
+                }
             } else {
-                $tam = "";
-            }
-            if ($tam == "Toyota") {
-                include("Toyota.php");
-            } else if ($tam == "Honda") {
-                include("Honda.php");
-            } else if ($tam == "Mercedes-Benz") {
-                include("Mercedes-Benz.php");
-            } else if ($tam == "Ford") {
-                include("Ford.php");
-            } else if ($tam == "BMW") {
-                include("BMW.php");
-            } else if ($tam == "Chevrolet") {
-                include("Chevrolet.php");
-            } else if ($tam == "Hyundai") {
-                include("Hyundai.php");
-            } else if ($tam == "Kia") {
-                include("Kia.php");
-            } else if ($tam == "Mazda") {
-                include("Mazda.php");
-            } else if ($tam == "VinFast") {
-                include("VinFast.php");
-            } else if ($tam == "Mercedes-Benz-GL-Class") {
-                include("Mercedes-Benz-GL-Class.php");
-            } else if ($tam == "Mercedes-Benz-E-Class") {
-                include("Mercedes-Benz-E-Class.php");
-            } else if ($tam == "Mitsubishi-Xpander-Cross") {
-                include("Mitsubishi-Xpander-Cross.php");
-            } else if ($tam == "Toyota-Fortuner") {
-                include("Toyota-Fortuner.php");
-            } else if ($tam == "Mercedes-Benz-S-Class") {
-                include("Mercedes-Benz-S-Class.php");
-            } else if ($tam == "Mercedes-Benz-C-Class") {
-                include("Mercedes-Benz-C-Class.php");
-            } else if ($tam == "Hyundai-Santafe") {
-                include("Hyundai-Santafe.php");
-            } else if ($tam == "Toyota-Corolla-Cross") {
-                include("Toyota-Corolla-Cross.php");
-            } else if ($tam == "Ford-Everest") {
-                include("Ford-Everest.php");
-            } else if ($tam == "Toyota-Vios") {
-                include("Toyota-Vios.php");
-            } else if ($tam == "Duoi-500-tr") {
-                include("Duoi-500-tr.php");
-            } else if ($tam == "500-700tr") {
-                include("500-700tr.php");
-            } else if ($tam == "700-1t") {
-                include("700-1t.php");
-            } else if ($tam == "tren1t") {
-                include("tren1t.php");
-            } else {
+                // Nếu không có biến $_GET["select"] được truyền vào, hiển thị trang mặc định là products.php
                 include("products.php");
             }
-
             ?>
+
+
+
         </div>
     </div>
     <?php

@@ -67,28 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const modal = document.querySelector(".modal");
-const openModalBtn = document.querySelector(".open-modal-btn");
-const iconCloseModal = document.querySelector(".modal__header i");
-
-function toggleModal() {
-    modal.classList.toggle("hide");
-}
-
-openModalBtn.addEventListener("click", toggleModal);
-iconCloseModal.addEventListener("click", toggleModal);
-
-modal.addEventListener("click", (e) => {
-    if (e.target == e.currentTarget) toggleModal();
-});
-function showFunction() {
-    var cardList = document.querySelector(".card-list-function");
-    cardList.classList.toggle("show"); // Thêm hoặc xóa lớp 'show'
-}
-function closeCardList() {
-    var cardList = document.querySelector(".card-list-function");
-    cardList.classList.remove("show");
-}
 document.addEventListener("DOMContentLoaded", function () {
     const openModalBtn = document.querySelector(".open-modal-btn");
     const modal = document.querySelector(".modal");
@@ -191,5 +169,48 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy ra input radio của tùy chọn "Liên quan nhất"
+    const defaultOption = document.querySelector('.index-fn:first-child input[type="radio"]');
+
+    // Đặt thuộc tính checked cho input radio mặc định
+    defaultOption.checked = true;
+});
+
+// Lấy phần tử nút và danh sách tùy chọn
+const button = document.querySelector(".btn-function");
+const cardList = document.querySelector(".card-list-function");
+
+// Thêm sự kiện click cho nút
+button.addEventListener("click", function () {
+    // Kiểm tra trạng thái hiện tại của danh sách tùy chọn
+    const isHidden = cardList.classList.contains("show");
+
+    // Nếu đang ẩn, hiển thị danh sách và kích hoạt hiệu ứng slide từ phải sang trái
+    // Nếu đang hiển thị, ẩn danh sách và kích hoạt hiệu ứng slide từ trái sang phải
+    if (!isHidden) {
+        cardList.classList.add("show");
+    } else {
+        cardList.classList.remove("show");
+    }
+});
+
+// Lấy tất cả các input radio trong danh sách tùy chọn
+const radioOptions = document.querySelectorAll('.index-fn input[type="radio"]');
+
+// Lặp qua từng input radio và thêm sự kiện 'change' cho mỗi input
+radioOptions.forEach(function (option) {
+    option.addEventListener("change", function () {
+        // Lấy ra phần tử span chứa nội dung hiện tại của thẻ "Sắp xếp"
+        const sortText = document.querySelector(".btn-function span");
+
+        // Lấy ra nội dung của tùy chọn đã chọn và gán cho thẻ "Sắp xếp"
+        const selectedOptionText = this.nextElementSibling.textContent;
+        sortText.textContent = selectedOptionText;
+
+        // Ẩn danh sách tùy chọn sau khi chọn xong
+        cardList.classList.remove("show");
     });
 });
