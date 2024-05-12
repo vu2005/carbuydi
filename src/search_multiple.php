@@ -23,7 +23,7 @@ if (isset($_GET['select'])) {
                 ci.dashboard_image,
                 ci.inspection_image,
                 ci.other_image,
-                sc.address
+                sc.province
             FROM 
                 cars c
             INNER JOIN 
@@ -90,7 +90,7 @@ if (isset($_GET['select'])) {
             echo "</div>";
             echo "<div class='map-products'>";
             // Hiển thị địa điểm
-            echo "<p><i class='bx bx-map'></i>" . $row["address"] . "</p>";
+            echo "<p><i class='bx bx-map'></i>" . $row["province"] . "</p>";
             echo "</div>";
             echo "</div>";
         }

@@ -1,5 +1,4 @@
 <?php
-
 // Truy vấn dữ liệu số lượng xe trong bảng cars
 $sql_count = "SELECT COUNT(*) AS total FROM cars";
 $result_count = $conn->query($sql_count);
@@ -31,7 +30,7 @@ SELECT
     ci.dashboard_image,
     ci.inspection_image,
     ci.other_image,
-    sc.address
+    sc.province
 FROM cars c
 INNER JOIN cars_details cd ON c.id = cd.car_id
 INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -70,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ci.dashboard_image,
                 ci.inspection_image,
                 ci.other_image,
-                sc.address
+                sc.province
             FROM cars c
             INNER JOIN cars_details cd ON c.id = cd.car_id
             INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -98,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ci.dashboard_image,
                 ci.inspection_image,
                 ci.other_image,
-                sc.address
+                sc.province
             FROM cars c
             INNER JOIN cars_details cd ON c.id = cd.car_id
             INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -126,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ci.dashboard_image,
                 ci.inspection_image,
                 ci.other_image,
-                sc.address
+                sc.province
             FROM cars c
             INNER JOIN cars_details cd ON c.id = cd.car_id
             INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -153,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -179,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -205,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -231,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -256,7 +255,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
@@ -281,12 +280,271 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ci.dashboard_image,
             ci.inspection_image,
             ci.other_image,
-            sc.address
+            sc.province
         FROM cars c
         INNER JOIN cars_details cd ON c.id = cd.car_id
         INNER JOIN cars_image ci ON c.id = ci.car_id
         INNER JOIN sellers_car sc ON c.id = sc.car_id
         ORDER BY c.year DESC";
+            break;
+
+        case "province_hanoi":
+            $sql = "SELECT 
+            c.id,
+            c.make,
+            c.model,
+            c.year,
+            c.mileage,
+            c.price,
+            cd.title AS car_title,
+            cd.transmission,
+            cd.fuel_type,
+            ci.front_image,
+            ci.rear_image,
+            ci.left_image,
+            ci.right_image,
+            ci.dashboard_image,
+            ci.inspection_image,
+            ci.other_image,
+            sc.province
+        FROM cars c
+        INNER JOIN cars_details cd ON c.id = cd.car_id
+        INNER JOIN cars_image ci ON c.id = ci.car_id
+        INNER JOIN sellers_car sc ON c.id = sc.car_id
+        WHERE sc.province LIKE '%Hà Nội%'";
+            break;
+
+        case "province_hcm":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Hồ Chí Minh%'";
+            break;
+        case "province_binh_duong":
+            $sql = "SELECT 
+            c.id,
+            c.make,
+            c.model,
+            c.year,
+            c.mileage,
+            c.price,
+            cd.title AS car_title,
+            cd.transmission,
+            cd.fuel_type,
+            ci.front_image,
+            ci.rear_image,
+            ci.left_image,
+            ci.right_image,
+            ci.dashboard_image,
+            ci.inspection_image,
+            ci.other_image,
+            sc.province
+        FROM cars c
+        INNER JOIN cars_details cd ON c.id = cd.car_id
+        INNER JOIN cars_image ci ON c.id = ci.car_id
+        INNER JOIN sellers_car sc ON c.id = sc.car_id
+        WHERE sc.province LIKE '%Bình Dương%'";
+            break;
+        case "province_dong_nai":
+            $sql = "SELECT 
+            c.id,
+            c.make,
+            c.model,
+            c.year,
+            c.mileage,
+            c.price,
+            cd.title AS car_title,
+            cd.transmission,
+            cd.fuel_type,
+            ci.front_image,
+            ci.rear_image,
+            ci.left_image,
+            ci.right_image,
+            ci.dashboard_image,
+            ci.inspection_image,
+            ci.other_image,
+            sc.province
+        FROM cars c
+        INNER JOIN cars_details cd ON c.id = cd.car_id
+        INNER JOIN cars_image ci ON c.id = ci.car_id
+        INNER JOIN sellers_car sc ON c.id = sc.car_id
+        WHERE sc.province LIKE '%Đồng Nai%'";
+            break;
+        case "province_bac_ninh":
+            $sql = "SELECT 
+            c.id,
+            c.make,
+            c.model,
+            c.year,
+            c.mileage,
+            c.price,
+            cd.title AS car_title,
+            cd.transmission,
+            cd.fuel_type,
+            ci.front_image,
+            ci.rear_image,
+            ci.left_image,
+            ci.right_image,
+            ci.dashboard_image,
+            ci.inspection_image,
+            ci.other_image,
+            sc.province
+        FROM cars c
+        INNER JOIN cars_details cd ON c.id = cd.car_id
+        INNER JOIN cars_image ci ON c.id = ci.car_id
+        INNER JOIN sellers_car sc ON c.id = sc.car_id
+        WHERE sc.province LIKE '%Bắc Ninh%'";
+            break;
+        case "province_long_an":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Long An%'";
+            break;
+        case "province_hai_duong":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Hải Dương%'";
+            break;
+        case "province_khanh_hoa":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Khánh Hòa%'";
+            break;
+        case "province_da_nang":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Đà Nẵng%'";
+            break;
+        case "province_hai_phong":
+            $sql = "SELECT 
+                c.id,
+                c.make,
+                c.model,
+                c.year,
+                c.mileage,
+                c.price,
+                cd.title AS car_title,
+                cd.transmission,
+                cd.fuel_type,
+                ci.front_image,
+                ci.rear_image,
+                ci.left_image,
+                ci.right_image,
+                ci.dashboard_image,
+                ci.inspection_image,
+                ci.other_image,
+                sc.province
+            FROM cars c
+            INNER JOIN cars_details cd ON c.id = cd.car_id
+            INNER JOIN cars_image ci ON c.id = ci.car_id
+            INNER JOIN sellers_car sc ON c.id = sc.car_id
+            WHERE sc.province LIKE '%Hải Phòng%'";
+            break;
+
+        case "":
+            $sql = "";
+            break;
+        case "":
+            $sql = "";
             break;
     }
 }
@@ -340,7 +598,7 @@ if ($result->num_rows > 0) {
             echo "</div>";
             echo "<div class='map-products'>";
             // Hiển thị địa điểm
-            echo "<p><i class='bx bx-map'></i>" . $row["address"] . "</p>";
+            echo "<p><i class='bx bx-map'></i>" . $row["province"] . "</p>";
             echo "</div>";
             echo "</div>";
         }

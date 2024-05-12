@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->begin_transaction();
 
     try {
+        $formatted_price = str_replace('.', '', $_POST['price']); // Xóa dấu chấm trong giá trị nhập vào
+
         // Thêm dữ liệu vào bảng cars
         $sql = "INSERT INTO cars (make, model, version, year, `condition`, mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
@@ -26,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST['year'],
             $_POST['condition'],
             $_POST['mileage'],
-            $_POST['price']
+            $formatted_price // Sử dụng giá trị đã định dạng
         );
         $stmt->execute();
 
@@ -263,6 +265,8 @@ function uploadImage($file)
                                 <div id="result" style="margin: 0 5px;"></div>
                             </label>
                             <input type="text" id="price" name="price" oninput="handleInput()" />
+                            <!-- Trường ẩn để lưu giá trị đã định dạng -->
+                            <input type="hidden" id="formatted_price" name="formatted_price" />
                         </div>
                         <div class="control button" onclick="nextTab('tab1')">Tiếp tục</div>
                         <script>
@@ -280,11 +284,13 @@ function uploadImage($file)
                                 var convertedNumber = convertNumberToWords(number);
                                 var resultDiv = document.getElementById("result");
                                 resultDiv.textContent = "[" + convertedNumber + "]";
+
+                                // Lưu giá trị đã định dạng vào trường ẩn
+                                document.getElementById("formatted_price").value = number;
                             }
 
-
                             function convertNumberToWords(number) {
-                                var suffixes = ["đ", "K", "Triệu", "Tỷ", "Ngìn tỷ"]; // Suffixes for thousands, millions, billions, trillions
+                                var suffixes = ["đ", "K", "Triệu", "Tỷ", "Ngàn Tỷ"]; // Suffixes for thousands, millions, billions, trillions
                                 if (number === "") {
                                     return "0";
                                 }

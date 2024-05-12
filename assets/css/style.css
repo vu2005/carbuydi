@@ -290,3 +290,25 @@
 .products-a {
     text-decoration: none;
 }
+@keyframes typing {
+    0%,
+    100% {
+        width: 0%;
+    }
+
+    70%,
+    90% {
+        width: 35%;
+    }
+}
+
+@keyframes blink {
+    0%,
+    100% {
+        border-right: 10px solid transparent;
+    }
+
+    50% {
+        border-right: 10px solid #1a6fb7;
+    }
+}

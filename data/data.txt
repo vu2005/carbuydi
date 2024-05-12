@@ -10,7 +10,7 @@ CREATE TABLE cars (
     year INT, -- Năm sản xuất
     `condition` VARCHAR(50), -- Tình trạng (Ví dụ: Mới, Đã qua sử dụng)
     mileage DECIMAL(10, 2), -- Số KM
-    price DECIMAL(15, 2) -- Giá
+    price DECIMAL(15) -- Giá
 );
 
 -- Bảng chi tiết xe (cars_details)

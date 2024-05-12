@@ -17,8 +17,6 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
                 require_once("right-filter.php");
                 ?>
             </div>
-
-            
             <?php
             include_once("function.php");
             ?>

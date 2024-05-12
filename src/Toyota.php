@@ -29,7 +29,7 @@ SELECT
     ci.dashboard_image,
     ci.inspection_image,
     ci.other_image,
-    sc.address,
+    sc.province,
     sc.image_url
 FROM cars c
 INNER JOIN cars_details cd ON c.id = cd.car_id
@@ -73,7 +73,7 @@ if ($result->num_rows > 0) {
         echo "</div>";
         echo "<div class='map-products'>";
         // Hiển thị địa điểm
-        echo "<p><i class='bx bx-map'></i>" . $row["address"] . "</p>";
+        echo "<p><i class='bx bx-map'></i>" . $row["province"] . "</p>";
         echo "</div>";
         echo "</div>";
     }

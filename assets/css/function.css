@@ -134,7 +134,7 @@
     border: 1px solid #adadad;
     cursor: pointer;
 }
-#flex-price > span > p {
+#flex-price > span {
     color: #1a6fb7;
     font-weight: 500;
 }
@@ -181,8 +181,10 @@
 #flex-year > span {
     width: 80px;
     height: 50px;
+    font-weight: 500;
     border: 1px solid #adadad;
     display: flex;
+    color: #1a6fb7;
     border-radius: 8px;
     align-items: center;
     justify-content: center;

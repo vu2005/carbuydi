@@ -38,15 +38,24 @@ if (isset($_GET['id'])) {
         $fuel_type = $row['fuel_type'];
         $body_style = $row['body_style'];
         $color = $row['color'];
-        $address = $row['address']; // Địa chỉ của người bán
+        $province = $row['province']; // Địa chỉ của người bán
         $seller_name = $row['name']; // Tên người bán
         $seller_phone = $row['phone']; // Số điện thoại người bán
     } else {
         echo '<span class="msg">Đã xảy ra lỗi khi cập nhật sản phẩm!</span>';
     }
 }
+function convertNumberToWords($number)
+{
+    $suffixes = ["đ", "k", "triệu", "tỷ", "ngàn tỷ"]; // Suffixes for thousands, millions, billions, trillions
+    $index = 0;
+    while ($number >= 1000) {
+        $number /= 1000;
+        $index++;
+    }
+    return round($number, 2) . ' ' . $suffixes[$index];
+}
 ?>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,7 +96,7 @@ if (isset($_GET['id'])) {
                             <div class="img-wrap">
                                 <img src="<?php echo $row['front_image']; ?>" alt="" />
                             </div>
-                            <p class="quantity-img">1/8</p>
+                            <p class="quantity-img"></p>
                         </div>
                         <div class="w830px">
                             <div class="max-w830">
@@ -276,7 +285,7 @@ if (isset($_GET['id'])) {
             <div class="details-xe">
                 <div class="products-details2">
                     <h2 class="details-text">🔥<?php echo $title ?></h2>
-                    <p class="price-details"><?php echo $price ?> tỷ</p>
+                    <p class="price-details"><?php echo convertNumberToWords($price) ?></p>
                     <div class="details-2">
                         <div class="details-icon">
                             <i class='bx bx-calendar'></i>
@@ -325,7 +334,7 @@ if (isset($_GET['id'])) {
                             <i class='bx bx-map'></i>
                             <p>Vị trí</p>
                         </div>
-                        <span><?php echo $row['address'] ?></span>
+                        <span><?php echo $row['province'] ?></span>
                     </div>
 
                     <div class="details-2">
