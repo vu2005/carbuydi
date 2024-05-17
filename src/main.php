@@ -12,7 +12,6 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
             ?>
             <div class="text-typing">
                 <h1>Carbuydi.vn-Mua Bán Xe Hơi Toàn Quốc</h1>
-
                 <?php
                 require_once("right-filter.php");
                 ?>
@@ -23,26 +22,82 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
             <?php
             // Kiểm tra xem biến $_GET["select"] đã được truyền vào hay chưa
             if (isset($_GET["select"])) {
-                // Tách chuỗi $_GET["select"] thành các phần riêng biệt bằng dấu phẩy và loại bỏ khoảng trắng ở đầu và cuối chuỗi
                 $selects = array_map('trim', explode(",", $_GET["select"]));
 
-                // Nếu có nhiều hơn một lựa chọn, chuyển hướng đến trang search_multiple.php
                 if (count($selects) > 1) {
-                    include("search_multiple.php");
+                    include("results_search.php");
                 } else {
-                    // Danh sách các trang cho phép
-                    $allowedPages = array(
-                        "toyota", "honda", "mercedes-benz", "ford", "bmw", "chevrolet", "hyundai", "kia",
-                        "mazda", "vinfast", "mercedes-benz-gl-class", "mercedes-benz-e-class", "mitsubishi-xpander-cross",
-                        "toyota-fortuner", "mercedes-benz-s-class", "mercedes-benz-c-class", "hyundai-santafe",
-                        "toyota-corolla-cross", "ford-everest", "toyota-vios", "duoi-500-tr", "500-700tr", "700-1t", "tren1t", "search-cars"
-                    );
+                    require_once("allowed_pages.php"); // Bao gồm các mảng tách biệt
 
-                    // Kiểm tra từng phần trong danh sách các hãng xe được chọn
                     foreach ($selects as $select) {
                         // Chuyển đổi thành chữ thường
                         $select = strtolower($select);
+                        // Kiểm tra xem trang được yêu cầu có tồn tại trong danh sách trang cho phép hay không
+                        if (in_array($select, $allowedPages)) {
+                            // Nếu trang được yêu cầu tồn tại trong danh sách trang cho phép, include trang tương ứng
+                            include("$select.php");
+                        } else {
+                            // Nếu trang không tồn tại, chuyển hướng đến trang 404.php và kết thúc vòng lặp
+                            include("404.php");
+                            break;
+                        }
+                    }
+                }
+            } elseif (isset($_GET["price"])) {
+                $price = array_map('trim', explode(",", $_GET["price"]));
 
+                if ($price) {
+                    include("results_price.php");
+                } else {
+                    require_once("allowed_pages.php"); // Bao gồm các mảng tách biệt
+
+                    foreach ($price as $price) {
+                        // Chuyển đổi thành chữ thường
+                        $select = strtolower($select);
+                        // Kiểm tra xem trang được yêu cầu có tồn tại trong danh sách trang cho phép hay không
+                        if (in_array($select, $allowedPages)) {
+                            // Nếu trang được yêu cầu tồn tại trong danh sách trang cho phép, include trang tương ứng
+                            include("$select.php");
+                        } else {
+                            // Nếu trang không tồn tại, chuyển hướng đến trang 404.php và kết thúc vòng lặp
+                            include("404.php");
+                            break;
+                        }
+                    }
+                }
+            } elseif (isset($_GET["mileage"])) {
+                $mileage = array_map('trim', explode(",", $_GET["mileage"]));
+
+                if ($mileage) {
+                    include("results_mileage.php");
+                } else {
+                    require_once("allowed_pages.php"); // Bao gồm các mảng tách biệt
+
+                    foreach ($mileage as $mileage) {
+                        // Chuyển đổi thành chữ thường
+                        $select = strtolower($select);
+                        // Kiểm tra xem trang được yêu cầu có tồn tại trong danh sách trang cho phép hay không
+                        if (in_array($select, $allowedPages)) {
+                            // Nếu trang được yêu cầu tồn tại trong danh sách trang cho phép, include trang tương ứng
+                            include("$select.php");
+                        } else {
+                            // Nếu trang không tồn tại, chuyển hướng đến trang 404.php và kết thúc vòng lặp
+                            include("404.php");
+                            break;
+                        }
+                    }
+                }
+            } elseif (isset($_GET["year"])) {
+                $year = array_map('trim', explode(",", $_GET["year"]));
+
+                if ($year) {
+                    include("results_year.php");
+                } else {
+                    require_once("allowed_pages.php"); // Bao gồm các mảng tách biệt
+
+                    foreach ($year as $year) {
+                        // Chuyển đổi thành chữ thường
+                        $select = strtolower($select);
                         // Kiểm tra xem trang được yêu cầu có tồn tại trong danh sách trang cho phép hay không
                         if (in_array($select, $allowedPages)) {
                             // Nếu trang được yêu cầu tồn tại trong danh sách trang cho phép, include trang tương ứng
@@ -55,16 +110,9 @@ require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
                     }
                 }
             } else {
-                // Nếu không có biến $_GET["select"] được truyền vào, hiển thị trang mặc định là products.php
                 include("products.php");
             }
             ?>
-
-
-
         </div>
     </div>
-    <?php
-    require_once('page-item.php');
-    ?>
 </div>

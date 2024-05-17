@@ -10,6 +10,8 @@
 
         <div id="flex-mileage">
             <input type="range" id="mileage" class="mileage" min="0" max="500000" value="0">
+            <input type="hidden" name="sliding_mileage" id="slidingMileage" value="0">
+
         </div>
         <div class="flex-mileage">
             <p>Tối Thiểu: </p>
@@ -26,16 +28,34 @@
     </div>
 </div>
 <script>
-    var slider = document.getElementById("mileage");
-    var output = document.getElementById("mileageRange");
-    output.innerHTML = numberWithCommas(slider.value);
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy các phần tử DOM cần thiết
+    const mileageRange = document.getElementById("mileage");
+    const mileageDisplay = document.getElementById("mileageRange");
+    const slidingMileage = document.getElementById("slidingMileage");
 
-    slider.oninput = function() {
-        output.innerHTML = numberWithCommas(this.value);
-    }
+    // Cập nhật giá trị số KM được chọn khi trang được tải lại
+    updateMileageDisplay(mileageRange, mileageDisplay, slidingMileage);
 
-    // Hàm định dạng số với dấu phẩy
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    // Cập nhật giá trị số KM được chọn khi thanh trượt được kéo
+    mileageRange.addEventListener("input", function () {
+        updateMileageDisplay(mileageRange, mileageDisplay, slidingMileage);
+    });
+});
+
+function updateMileageDisplay(rangeElement, displayElement, hiddenInputElement) {
+    const value = Number(rangeElement.value);
+    displayElement.textContent = value.toLocaleString('en-US'); // Sử dụng 'en-US' để sử dụng định dạng số tiêu chuẩn của tiếng Anh
+    hiddenInputElement.value = value;
+}
+
+// Xử lý sự kiện khi người dùng kết thúc kéo thanh trượt
+document.getElementById("mileage").addEventListener("mouseup", function () {
+    setTimeout(function () {
+        var slidingMileageValue = document.getElementById("mileage").value;
+        window.location.href = "index.php?mileage=" + slidingMileageValue;
+    }, 2000); // 2000 milliseconds = 2 seconds
+});
+
+
 </script>

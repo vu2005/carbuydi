@@ -26,9 +26,6 @@
     width: 1090px;
     /* border-radius: 5px; */
 }
-.change-list > p {
-    color: #1a6fb7;
-}
 .prevBtn,
 .nextBtn {
     position: absolute;
@@ -50,6 +47,10 @@
 .btn-function {
     display: flex;
 }
+.btn-function > p {
+    margin-top: 3px;
+}
+
 .btn-removeAll {
     margin: 5px 0;
     outline: none;

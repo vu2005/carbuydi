@@ -7,13 +7,10 @@ if (!$result_count) {
 }
 $row_count = $result_count->fetch_assoc();
 $total_cars = $row_count['total'];
-
-// In ra tổng số lượng xe
 echo "<p class='total-cars'>Tổng số lượng xe: " . $total_cars . "</p>";
 echo "<div class='products-sp'>"; // Mở thẻ cha products-sp ở đây
 
-$sql = "
-SELECT 
+$sql = "SELECT 
     c.id,
     c.make,
     c.model,
@@ -37,11 +34,6 @@ INNER JOIN cars_image ci ON c.id = ci.car_id
 INNER JOIN sellers_car sc ON c.id = sc.car_id;
 ";
 
-$result = $conn->query($sql);
-
-if (!$result) {
-    die("Lỗi truy vấn: " . $conn->error);
-}
 
 $result = $conn->query($sql);
 
@@ -54,6 +46,9 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Kiểm tra nếu trường 'car_id' tồn tại trong kết quả trước khi sử dụng
         if (isset($row['id'])) {
+            // Định dạng lại số km
+            $formatted_mileage = number_format($row['mileage'], 0, '.'); // 2 là số chữ số sau dấu chấm, '.' là dấu chấm phân cách, ',' là dấu phân cách hàng nghìn
+
             // Hiển thị sản phẩm
             echo "<div class='products'>";
             echo "<a href='Details.php?id=" . $row['id'] . "' class='products-a'>";
@@ -86,7 +81,7 @@ if ($result->num_rows > 0) {
             echo "</ul>";
             echo "<ul>";
             // Hiển thị số km và hộ số
-            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $row["mileage"] . " Km</li>";
+            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $formatted_mileage . " KM</li>";
             echo "<li><img src='../assets/images/icon4.svg' alt=''>" . $row["transmission"] . "</li>";
             echo "</ul>";
             echo "</div>";

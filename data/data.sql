@@ -9,7 +9,7 @@ CREATE TABLE cars (
     version VARCHAR(255), -- Phiên bản
     year INT, -- Năm sản xuất
     `condition` VARCHAR(50), -- Tình trạng (Ví dụ: Mới, Đã qua sử dụng)
-    mileage DECIMAL(10, 2), -- Số KM
+    mileage DECIMAL(10), -- Số KM
     price DECIMAL(15) -- Giá
 );
 
@@ -28,10 +28,11 @@ CREATE TABLE cars_details (
     FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
+-- Bảng hình ảnh xe (cars_image)
 CREATE TABLE cars_image (
     id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT,
-    shop_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xecars_image
+    shop_image VARCHAR(255), -- Đường dẫn đến hình ảnh của xe
     front_image VARCHAR(255), -- Đường dẫn đến ảnh trước xe
     rear_image VARCHAR(255), -- Đường dẫn đến ảnh sau xe
     left_image VARCHAR(255), -- Đường dẫn đến ảnh bên trái xe
@@ -42,9 +43,9 @@ CREATE TABLE cars_image (
     FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
--- Bảng thông tin người bán xe (sellers_car)
+-- Bảng người bán xe (sellers_car)
 CREATE TABLE sellers_car (
-    id INT AUTO_INCREMENT PRIMARY KEY, -- Mã định danh duy nhất cho mỗi người bán (khóa chính)
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255), -- Họ và tên người bán
     company_name VARCHAR(255), -- Tên công ty (Nếu có)
     province VARCHAR(255), -- Tỉnh/Thành phố
@@ -54,7 +55,7 @@ CREATE TABLE sellers_car (
     posted_date DATE, -- Ngày đăng thông tin về sản phẩm
     car_id INT, -- Mã xe (khóa ngoại từ bảng cars)
     image_url VARCHAR(255), -- Đường dẫn đến hình ảnh của người bán
-    FOREIGN KEY (car_id) REFERENCES cars(id) -- Liên kết với bảng cars
+    FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
 -- Bảng thông tin người dùng (users)
@@ -69,12 +70,6 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL -- Mật khẩu (không được để trống)
 );
 
-CREATE TABLE users_image (
-  id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(id),
-  avt_image VARCHAR(255) COMMENT 'Đường dẫn đến hình ảnh của người dùng (avatar)',
-  shop_image VARCHAR(255) COMMENT 'Đường dẫn đến hình ảnh của cửa hàng'
-);
 -- Bảng thông tin người dùng bán xe (users_sell_cars)
 CREATE TABLE users_sell_cars (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -83,7 +78,7 @@ CREATE TABLE users_sell_cars (
     model VARCHAR(255), -- Dòng xe
     version VARCHAR(255), -- Phiên bản
     year INT, -- Năm sản xuất
-    mileage INT, -- Số KM (sử dụng kiểu dữ liệu TEXT cho phép nhập dữ liệu độ dài lớn)
+    mileage INT, -- Số KM
     phone VARCHAR(20), -- Số điện thoại
     posted_date DATE, -- Ngày đăng thông tin
     FOREIGN KEY (user_id) REFERENCES users(id) -- Liên kết với bảng users
@@ -98,4 +93,13 @@ CREATE TABLE admins (
     full_name VARCHAR(255), -- Họ và tên đầy đủ của admin
     date_of_birth DATE, -- Ngày sinh
     role ENUM('admin', 'editor') DEFAULT 'admin' -- Vai trò của admin (admin hoặc editor)
+);
+
+-- Bảng thông tin đăng nhập và đăng bán xe của người dùng (user_car_listing)
+CREATE TABLE user_car_listing (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT, -- Mã người dùng (khóa ngoại từ bảng users)
+    car_id INT, -- Mã xe (khóa ngoại từ bảng cars)
+    FOREIGN KEY (user_id) REFERENCES users(id), -- Liên kết với bảng users
+    FOREIGN KEY (car_id) REFERENCES cars(id) -- Liên kết với bảng cars
 );

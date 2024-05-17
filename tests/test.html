@@ -1,62 +1,103 @@
-<div class="tags">
-    <div class="body-input">
-        <div class="icon-search"><i class="bx bx-search"></i></div>
-        <input type="text" list="items" placeholder="Tìm kiếm xe theo hãng xe, Dòng xe hoặc từ khóa " />
-        <datalist id="items">
-            <option value="Toyota">Toyota</option>
-            <option value="Honda">Honda</option>
-            <option value="Mercedes-Benz">Mercedes-Benz</option>
-            <option value="Ford">Ford</option>
-            <option value="Chevrolet">Chevrolet</option>
-            <option value="Hyundai">Hyundai</option>
-            <option value="BMW">BMW</option>
-            <option value="Kia">Kia</option>
-            <option value="Mazda">Mazda</option>
-            <option value="VinFast">VinFast</option>
-        </datalist>
+<div class="function-div">
+    <div class="flex-function" onclick="functionClick(this)">
+        <div class="fn-sp">
+            <img src="../assets/images/fn9.svg" alt="">
+            <p style="color: #31406f;">MÀU SẮC</p>
+
+        </div> <i class='bx bx-chevron-down' color="color: #3f4047;"></i>
     </div>
-    <button class="btn-removeAll">Remove All</button>
+    <div class="function-nav">
+        <div class="color">
+            <div class="box-color">
+                <div class="hover-color black selected" name="black" id="black" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Đen</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color red selected" name="red" id="red" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Đỏ</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color yellow selected" name="yellow" id="yellow" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Vàng</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color white selected" name="white" id="white" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Trắng</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color brown selected" name="brown" id="brown" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Nâu</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color orange selected" name="orange" id="orange" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Cam</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color silver selected" name="silver" id="silver" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Bạc</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color grey selected" name="grey" id="grey" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Xám</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color yellow copper selected" name="yellow_copper" id="yellow_copper" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Vàng đồng</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color blue selected" name="blue" id="blue" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Xanh dương</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color green selected" name="green" id="green" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Xanh lá</span>
+            </div>
+
+            <div class="box-color">
+                <div class="hover-color Violet selected" name="Violet" id="Violet" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Tím</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color pink selected" name="pink" id="pink" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Hồng</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color copper selected" name="copper" id="copper" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Đồng</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color sand gold selected" name="sand_gold" id="sand_gold" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> vàng cát</span>
+            </div>
+            <div class="box-color">
+                <div class="hover-color earthy orange selected" name="earthy_orange" id="earthy_orange" onclick="applyBoxShadow(this)"></div>
+                <span class="hidden-text"> Cam đất</span>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-    const ul = document.querySelector('.searched-items'); // Lấy phần tử danh sách đã tìm kiếm
-    const input = document.querySelector('.search-input');
-    const removeBtn = document.querySelector('.btn-removeAll'); // Lấy nút "Remove All"
+    // Function to apply box-shadow when a color div is clicked
+    function applyBoxShadow(div) {
+        var color = div.id; // Get the id of the clicked div (color)
+        var functionDiv = document.querySelector('.function-div');
 
-    let tags = []; // Khởi tạo mảng chứa các tag
-
-    createTag(); // Gọi hàm tạo tag
-
-    function createTag() {
-        ul.innerHTML = ''; // Xóa nội dung trong danh sách đã tìm kiếm
-        tags.forEach((tag, index) => {
-            let liTag = `
-<div class="list-tag">${tag}
-    <i class="bx bx-x-circle" onclick="removeTag(${index})"></i>
-</div>`;
-            ul.innerHTML += liTag;
-        });
-    }
-
-    function removeTag(index) {
-        tags.splice(index, 1); // Xóa tag khỏi mảng
-        createTag(); // Tạo lại danh sách tag
-    }
-
-    function addTag(e) {
-        if (e.key === 'Enter') {
-            let tag = e.target.value.trim();
-            if (tag !== '' && !tags.includes(tag)) {
-                tags.push(tag); // Thêm tag vào mảng
-                createTag(); // Tạo lại danh sách tag
+        if (div.classList.contains('selected')) {
+            functionDiv.style.boxShadow = 'none'; // Remove box-shadow if the div is already selected
+            div.classList.remove('selected'); // Remove the 'selected' class from the div
+        } else {
+            functionDiv.style.boxShadow = '2px 5px 5px 5px rgba(30, 112, 227, 0.3)'; // Apply box-shadow
+            var selectedButton = document.querySelector('.color .selected');
+            if (selectedButton) {
+                selectedButton.classList.remove('selected'); // Remove 'selected' class from previously selected div
             }
-            e.target.value = ''; // Xóa giá trị trong input
+            div.classList.add('selected'); // Add 'selected' class to the clicked div
         }
     }
 
-    input.addEventListener('keypress', addTag); // Thêm sự kiện cho input
-
-    removeBtn.addEventListener('click', () => {
-        tags.length = 0; // Xóa tất cả các tag trong mảng
-        createTag(); // Tạo lại danh sách tag
-    });
+    // Function to handle click on the main function div
+    function functionClick(div) {
+        var functionNav = div.nextElementSibling;
+        functionNav.classList.toggle('show');
+    }
 </script>

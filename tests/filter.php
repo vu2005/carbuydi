@@ -1,5 +1,5 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
+// Kết nối tới cơ sở dữ liệu
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -9,41 +9,38 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Kiểm tra kết nối
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Kết nối không thành công: " . $conn->connect_error);
 }
 
-// Lấy danh sách các hãng xe
-$sql = "SELECT * FROM car_brands";
-$result = $conn->query($sql);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Lấy giá trị lọc từ form
+    $sorting = $_POST["sorting"];
+    $sliding_price = $_POST["sliding_price"];
 
-if ($result->num_rows > 0) {
-    echo "<form action='filter.php' method='post'>";
-    echo "<select name='brand'>";
-    echo "<option value=''>Chọn hãng xe</option>";
-    while ($row = $result->fetch_assoc()) {
-        echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
+    // Truy vấn cơ sở dữ liệu với điều kiện lọc theo giá và/hoặc tùy chọn sorting
+    $sql = "SELECT * FROM cars WHERE price <= $sliding_price";
+
+    if (!empty($sorting)) {
+        if ($sorting == "under_500") {
+            $sql .= " AND price < 500000000";
+        } elseif ($sorting == "500_to_700") {
+            $sql .= " AND price >= 500000000 AND price < 700000000";
+        } elseif ($sorting == "700_to_1000") {
+            $sql .= " AND price >= 700000000 AND price < 1000000000";
+        } elseif ($sorting == "above_1b") {
+            $sql .= " AND price >= 1000000000";
+        }
     }
-    echo "</select>";
-    echo "<input type='submit' value='Lọc'>";
-    echo "</form>";
-} else {
-    echo "0 results";
-}
 
-// Kiểm tra xem đã chọn hãng xe nào
-if (isset($_POST['brand'])) {
-    $brand_id = $_POST['brand'];
-    $sql = "SELECT * FROM car_models WHERE brand_id = $brand_id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<ul>";
+        // Hiển thị dữ liệu
         while ($row = $result->fetch_assoc()) {
-            echo "<li>" . $row["model_name"] . "</li>";
+            echo "Mã xe: " . $row["id"] . " - Tên: " . $row["make"] . " - Giá: " . $row["price"] . "<br>";
         }
-        echo "</ul>";
     } else {
-        echo "0 results";
+        echo "Không có kết quả nào";
     }
 }
 

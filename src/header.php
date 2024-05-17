@@ -103,16 +103,16 @@ if ($user) {
                                         GIÁ XE
                                     </h4>
                                     <li>
-                                        <a href="index.php?select=Duoi-500-tr">Dưới 500 triệu</a>
+                                        <a href="index.php?price=under_500">Dưới 500 triệu</a>
                                     </li>
                                     <li>
-                                        <a href="index.php?select=500-700tr">Từ 500-700 triệu</a>
+                                        <a href="index.php?price=500_to_700">Từ 500-700 triệu</a>
                                     </li>
                                     <li>
-                                        <a href="index.php?select=700-1t">Từ 700 -1tỷ</a>
+                                        <a href="index.php?price=700_to_1000">Từ 700 -1tỷ</a>
                                     </li>
                                     <li>
-                                        <a href="index.php?select=tren1t">Trên 1 tỷ</a>
+                                        <a href="index.php?price=above_1b">Trên 1 tỷ</a>
                                     </li>
                                 </ul>
                             </div>

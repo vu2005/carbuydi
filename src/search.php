@@ -6,7 +6,6 @@ if (isset($_POST['search_term']) && !empty($_POST['search_term'])) {
     $searchTerm = $_POST['search_term'];
     // Câu lệnh SQL để lọc dữ liệu theo hãng xe hoặc tên
     $sql = "SELECT * FROM cars WHERE make LIKE '%$searchTerm%' OR model LIKE '%$searchTerm%'";
-    $sql = "SELECT * FROM cars WHERE make = '%$term%' OR make = '%$term%'";
     // Thực thi câu lệnh SQL và xử lý kết quả
     $result = mysqli_query($connection, $sql);
     if ($result) {

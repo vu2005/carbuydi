@@ -159,9 +159,10 @@
     margin: 0 0 10px 10px;
     transition: background-color 0.3s; /* Thêm transition cho hiệu ứng màu */
 }
-.option > button > p {
+.option > button > a {
     font-weight: 400;
     font-size: 12px;
+    text-decoration: none;
     color: #1a6fb7;
 }
 .option > button:hover {
@@ -264,14 +265,12 @@ input[type="checkbox"] {
 .name-gear {
     padding-left: 10px;
 }
-.hover-color.black {
+.hover-color {
     border-radius: 50%;
     width: 22px;
     text-align: center;
     height: 22px;
     background-color: rgb(19, 28, 74);
-    color: rgb(250, 250, 250);
-    border: 1px solid rgb(255, 255, 255);
 }
 .hidden-text {
     display: none;
@@ -288,12 +287,9 @@ input[type="checkbox"] {
 }
 
 .hover-color {
-    border-radius: 50%;
     cursor: pointer;
     width: 22px;
     height: 22px;
-    background-color: transparent;
-    border: 1px solid #000;
 }
 
 .hover-color.black {
@@ -309,8 +305,8 @@ input[type="checkbox"] {
 }
 
 .hover-color.white {
+    border: 1px solid #1a6fb7;
     background-color: #ffffff;
-    border: 1px solid #000;
 }
 
 .hover-color.brown {
@@ -380,9 +376,7 @@ input[type="checkbox"] {
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.hover-color:active {
-    border: 2px solid #fff;
-}
+
 .place {
     display: flex;
     padding: 10px;
@@ -396,4 +390,7 @@ input[type="checkbox"] {
 }
 .name-post {
     padding-left: 10px;
+}
+.box-shadow {
+    box-shadow: 0px 0px 2px 3px rgba(3, 177, 252, 0.5);
 }

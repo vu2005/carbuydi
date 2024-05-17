@@ -1,4 +1,4 @@
-<form class="form-select" action="#" method="POST">
+<div class="form-select">
     <div class="btn-function">
         <p>SẮP XẾP:</p>
         <span class="change-list">Liên quan nhất</span>
@@ -6,49 +6,48 @@
         <div class="card-list-function">
             <div class="card-list-function-body">
                 <div class="index-fn">
-                    <label for="">
-                        <input type="radio" name="sorting" value="all_cars" checked />
+                    <a href="index.php?select=all_cars">
+                        <input type="radio" name="sort" value="Liên quan nhất" checked />
                         <span>Liên quan nhất</span>
-                    </label>
+                    </a>
                 </div>
                 <div class="index-fn">
                     <p>Ngày đăng</p>
-                    <label for="">
-                        <input type="radio" name="sorting" value="newest" /><span>Mới nhất</span>
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" value="oldest" /><span>Cũ nhất</span>
-                    </label>
+                    <a href="index.php?select=posted_date_new">
+                        <input type="radio" name="sort" value="Mới nhất" /><span>Mới nhất</span>
+                    </a>
+                    <a href="index.php?select=posted_date_old">
+                        <input type="radio" name="sort" value="Cũ nhất" /><span>Cũ nhất</span>
+                    </a>
                 </div>
                 <div class="index-fn">
                     <p>Giá</p>
-                    <label for="">
-                        <input type="radio" name="sorting" value="price_asc" /><span>Tăng dần</span>
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" value="price_desc" /><span>Giảm dần</span>
-                    </label>
+                    <a href="index.php?select=up_price">
+                        <input type="radio" name="sort" value="Tăng dần" /><span>Tăng dần</span>
+                    </a>
+                    <a href="index.php?select=dow_price">
+                        <input type="radio" name="sort" value="Giảm dần" /><span>Giảm dần</span>
+                    </a>
                 </div>
                 <div class="index-fn">
                     <p>Số km</p>
-                    <label for="">
-                        <input type="radio" name="sorting" value="mileage_asc" /><span>Tăng dần</span>
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" value="mileage_desc" /><span>Giảm dần</span>
-                    </label>
+                    <a href="index.php?select=up_mileage">
+                        <input type="radio" name="sort" value="Chưa đi" /><span>Chưa đi</span>
+                    </a>
+                    <a href="index.php?select=dow_mileage">
+                        <input type="radio" name="sort" value="Đi nhiều" /><span>Đi nhiều</span>
+                    </a>
                 </div>
                 <div class="index-fn" style="border-bottom: none">
                     <p>Năm sản xuất</p>
-                    <label for="">
-                        <input type="radio" name="sorting" value="year_asc" /><span>Mới đến cũ</span>
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" value="year_desc" /><span>Cũ đến mới</span>
-                    </label>
+                    <a href="index.php?select=year_new">
+                        <input type="radio" name="sort" value="Mới đến cũ" /><span>Mới đến cũ</span>
+                    </a>
+                    <a href="index.php?select=year_old">
+                        <input type="radio" name="sort" value="Cũ đến mới" /><span>Cũ đến mới</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <button type="submit">Sắp xếp</button>
-</form>
+</div>

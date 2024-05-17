@@ -1,117 +1,80 @@
-<?php
-// Kết nối đến cơ sở dữ liệu
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "test_car";
+<form action="filter.php" method="POST">
+    <div class="function-div">
+        <div class="flex-function" onclick="functionClick(this)">
+            <div class="fn-sp">
+                <img src="../assets/images/fn3.svg" alt="">
+                <p style="color: #31406f;">GIÁ</p>
+            </div>
+            <i class='bx bx-chevron-down' style="color: #3f4047;"></i>
+        </div>
+        <div class="function-nav">
+            <input type="range" min="400" name="sliding_price" max="5000" value="0" class="price-slider" id="priceRange">
+            <input type="hidden" name="sorting" value=""> <!-- Dùng hidden input để lưu giá trị sorting -->
+            <div class="flex-price">
+                <p>Tối Thiểu: </p>
+                <p>Tối Đa:</p>
+            </div>
+            <div id="flex-price">
+                <span id="priceValue"></span>
+                <span>
+                    <p>5 tỷ</p>
+                </span>
+            </div>
+            <p class="suggest">
+                Gợi ý
+            </p>
+            <div class="option">
+                <label>
+                    <input type="radio" name="sorting" value="under_500"> Dưới 500tr
+                </label>
+                <label>
+                    <input type="radio" name="sorting" value="500_to_700"> 500tr - 700tr
+                </label>
+                <label>
+                    <input type="radio" name="sorting" value="700_to_1000"> 700tr - 1 tỷ
+                </label>
+                <label>
+                    <input type="radio" name="sorting" value="above_1b"> Trên 1 tỷ
+                </label>
+            </div>
+            <button type="submit">Lọc Giá</button>
+        </div>
+    </div>
+</form>
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Kiểm tra nếu biểu mẫu đã được gửi đi
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Bắt đầu một giao dịch
-    $conn->begin_transaction();
-
-    try {
-        // Xử lý giá trị nhập vào
-        $formatted_price = str_replace('.', '', $_POST['price']); // Xóa dấu chấm trong giá trị nhập vào
-
-        // Thêm dữ liệu vào bảng cars
-        $sql = "INSERT INTO cars (make, model, version, year, `condition`, mileage, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param(
-            "sssisdi",
-            $_POST['make'],
-            $_POST['model'],
-            $_POST['version'],
-            $_POST['year'],
-            $_POST['condition'],
-            $_POST['mileage'],
-            $formatted_price // Sử dụng giá trị đã định dạng
-        );
-        $stmt->execute();
-
-        // Thêm giá trị đã định dạng vào trường ẩn
-        $_POST['formatted_price'] = $formatted_price;
-
-        // Commit giao dịch
-        $conn->commit();
-
-        // Thông báo thành công
-        echo '<div class="toast success">';
-        echo '<i class="fa-solid fa-circle-check"></i>';
-        echo '<span class="msg">Đăng tin thành công!</span>';
-        echo '</div>';
-
-        // In ra giá trị đã được định dạng
-        $price_in_words = convertNumberToWords($formatted_price);
-        echo '<p class="price-details">' . $price_in_words . '</p>';
-    } catch (Exception $e) {
-        // Rollback giao dịch nếu có lỗi xảy ra
-        $conn->rollback();
-        echo "Lỗi: " . $e->getMessage();
-    }
-
-    // Đóng kết nối
-    $conn->close();
-}
-
-// Hàm chuyển đổi số thành chuỗi
-function convertNumberToWords($number)
-{
-    $suffixes = ["", "nghìn", "triệu", "tỷ", "ngàn tỷ"]; // Suffixes for thousands, millions, billions, trillions
-    $index = 0;
-    while ($number >= 1000) {
-        $number /= 1000;
-        $index++;
-    }
-    return round($number, 2) . ' ' . $suffixes[$index];
-}
-?>
-<div class="form-group">
-    <label for="price">Giá muốn bán:
-        <div id="result" style="margin: 0 5px;"></div>
-    </label>
-    <input type="text" id="price" name="price" oninput="handleInput()" />
-    <!-- Trường ẩn để lưu giá trị đã định dạng -->
-    <input type="hidden" id="formatted_price" name="formatted_price" />
-</div>
-<div class="control button" onclick="nextTab('tab1')">Tiếp tục</div>
+<!-- Thêm mã JavaScript sau form -->
 <script>
-    function addCommas(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
+    var priceSlider = document.getElementById("priceRange");
+    var priceValue = document.getElementById("priceValue");
 
-    function handleInput() {
-        var price = document.getElementById("price");
-        var value = price.value.trim();
-        if (value === "") return;
-        var number = value.replace(/\./g, "");
-        var formattedNumber = addCommas(number);
-        price.value = formattedNumber;
-        var convertedNumber = convertNumberToWords(number);
-        var resultDiv = document.getElementById("result");
-        resultDiv.textContent = "[" + convertedNumber + "]";
+    // Hiển thị giá trị ban đầu của thanh trượt
+    priceValue.innerHTML = priceSlider.value + "TR";
 
-        // Lưu giá trị đã định dạng vào trường ẩn
-        document.getElementById("formatted_price").value = number;
-    }
+    // Cập nhật giá trị khi người dùng di chuyển thanh trượt
+    function updatePriceValue() {
+        var value = parseInt(priceSlider.value); // Chuyển đổi giá trị sang số nguyên
+        var displayValue; // Biến để lưu giá trị hiển thị
 
-    function convertNumberToWords(number) {
-        var suffixes = ["đ", "K", "Triệu", "Tỷ", "Ngàn Tỷ"]; // Suffixes for thousands, millions, billions, trillions
-        if (number === "") {
-            return "0";
+        // Cập nhật giá trị cho input hidden
+        document.getElementById("slidingPrice").value = value;
+
+        if (value >= 1000) { // Nếu giá trị vượt quá 1000, đổi sang đơn vị tỷ
+            displayValue = value / 1000;
+            if (displayValue % 1 === 0) { // Kiểm tra xem có phải là số nguyên không
+                priceValue.innerHTML = displayValue + " tỷ";
+            } else {
+                priceValue.innerHTML = displayValue.toFixed(1) + " tỷ"; // Làm tròn đến 1 chữ số thập phân
+            }
+        } else { // Nếu giá trị nhỏ hơn 1000, sử dụng đơn vị triệu
+            priceValue.innerHTML = value + " Triệu";
         }
-        var num = parseInt(number);
-        var suffixIndex = Math.floor((number.length - 1) / 3);
-        var scaledNumber = num / Math.pow(1000, suffixIndex);
-        scaledNumber = Math.round(scaledNumber * 10) / 10;
-        var result = scaledNumber + " " + suffixes[suffixIndex];
-        return result;
     }
+
+    // Gán sự kiện oninput cho priceSlider
+    priceSlider.oninput = function() {
+        updatePriceValue(); // Gọi hàm updatePriceValue
+    };
+
+    // Gọi hàm updatePriceValue để cập nhật giá trị khi trang được tải
+    updatePriceValue();
 </script>

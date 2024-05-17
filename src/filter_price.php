@@ -4,60 +4,63 @@
             <img src="../assets/images/fn3.svg" alt="">
             <p style="color: #31406f;">GIÁ</p>
         </div>
-        <i class='bx bx-chevron-down' style="color: #3f4047;"></i>
+        <i class='bx bx-chevron-down'></i>
     </div>
     <div class="function-nav">
-        <input type="range" min="400" max="5000" value="0" class="price-slider" id="priceRange">
+        <input type="range" min="400000000" name="sorting" max="5000000000" value="400000000" class="price-slider" id="priceRange">
+        <input type="hidden" name="sliding_price" id="slidingPrice" value="400000000">
         <div class="flex-price">
             <p>Tối Thiểu: </p>
             <p>Tối Đa:</p>
         </div>
         <div id="flex-price">
-            <span id="priceValue"></span>
+            <span id="priceValue">400 Tr</span>
             <span>
                 <p>5 tỷ</p>
             </span>
         </div>
-        <p class="suggest">
-            Gợi ý
-        </p>
+        <p class="suggest">Gợi ý</p>
         <div class="option">
-            <button>
-                <p>Dưới 500tr</p>
-            </button>
-            <button>
-                <p>500tr - 700tr</p>
-            </button>
-            <button>
-                <p>700tr - 1 tỷ</p>
-            </button>
-            <button>
-                <p>Trên 1 tỷ</p>
-            </button>
+            <button name="sorting" value="under_500" onclick="setPriceFilter('under_500')">Dưới 500tr</button>
+            <button name="sorting" value="500_to_700" onclick="setPriceFilter('500_to_700')">500tr - 700tr</button>
+            <button name="sorting" value="700_to_1000" onclick="setPriceFilter('700_to_1000')">700tr - 1 tỷ</button>
+            <button name="sorting" value="above_1b" onclick="setPriceFilter('above_1b')">Trên 1 tỷ</button>
+
         </div>
     </div>
 </div>
 <script>
-    var priceSlider = document.getElementById("priceRange");
-    var priceValue = document.getElementById("priceValue");
-
-    // Hiển thị giá trị ban đầu của thanh kéo
-    priceValue.innerHTML = priceSlider.value + "TR";
-
-    // Cập nhật giá trị khi người dùng di chuyển thanh kéo
-    priceSlider.oninput = function() {
-        var value = parseInt(this.value); // Chuyển đổi giá trị sang số nguyên
-        var displayValue; // Biến để lưu giá trị hiển thị
-
-        if (value >= 1000) { // Nếu giá trị vượt quá 1000, đổi sang đơn vị tỷ
-            displayValue = value / 1000;
-            if (displayValue % 1 === 0) { // Kiểm tra xem có phải là số nguyên không
-                priceValue.innerHTML = displayValue + " tỷ";
+        function formatPrice(price) {
+            if (price >= 1000000000) {
+                return (price / 1000000000).toFixed(1) + " Tỷ";
             } else {
-                priceValue.innerHTML = displayValue.toFixed(1) + " tỷ"; // Làm tròn đến 1 chữ số thập phân
+                return (price / 1000000).toFixed(0) + " Tr";
             }
-        } else { // Nếu giá trị nhỏ hơn 1000, sử dụng đơn vị triệu
-            priceValue.innerHTML = value + " Triệu";
         }
-    };
-</script>
+
+        function updatePriceValue() {
+            var slider = document.getElementById("priceRange");
+            var output = document.getElementById("priceValue");
+            output.innerHTML = formatPrice(parseInt(slider.value));
+            document.getElementById("slidingPrice").value = slider.value;
+        }
+
+        function setPriceFilter(priceRange) {
+            window.location.href = "index.php?price=" + priceRange;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var slider = document.getElementById("priceRange");
+            slider.addEventListener("mouseup", function() {
+                setTimeout(function() {
+                    var slidingPrice = slider.value;
+                    window.location.href = "index.php?price=" + slidingPrice;
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+            slider.addEventListener("input", function() {
+                updatePriceValue();
+            });
+
+            updatePriceValue(); // Initialize the price value on load
+        });
+    </script>

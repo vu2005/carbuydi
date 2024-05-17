@@ -1,178 +1,24 @@
-<style>
-    .index-fn {
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #adadad;
-    }
-    .card-list-function {
-        overflow: hidden;
-        position: absolute;
-        display: none;
-        top: 20%;
-    }
-
-    .show {
-        display: block;
-        z-index: 1;
-        animation: slideFromRight 0.5s forwards;
-    }
-
-    .card-list-function-body {
-        border: 1px solid #1a6fb7;
-        width: 230px;
-        background: #fff;
-        border-radius: 20px;
-        padding: 10px 20px;
-    }
-    .index-fn label {
-        font-size: 14px;
-        font-family: "Roboto", system-ui, "Segoe UI", "Open Sans",
-            "Helvetica Neue", sans-serif;
-        margin: 10px 0;
-        font-weight: 500;
-        display: flex;
-    }
-
-    .index-fn > p {
-        text-align: left;
-        font-size: 17px;
-        margin-top: 5px;
-        font-family: "Roboto", system-ui, "Segoe UI", "Open Sans",
-            "Helvetica Neue", sans-serif;
-        font-weight: 500;
-        color: #000000ed;
-    }
-    .index-fn input {
-        width: 20px;
-        cursor: pointer;
-        height: 20px;
-        margin-right: 10px;
-    }
-
-    .index-fn input:checked + span {
-        color: #1a6fb7; /* Tùy chỉnh màu chữ nếu muốn */
-    }
-</style>
-<form class="form-select" action="#">
-    <div class="btn-function">
-        <p>SẮP XẾP:</p>
-        <span class="change-list">Liên quan nhất</span>
-        <i class="bx bx-chevron-down"></i>
-        <div class="card-list-function">
-            <div class="card-list-function-body">
-                <div class="index-fn">
-                    <label for="">
-                        <input type="radio" name="sorting" checked />
-                        <span>Liên quan nhất</span>
-                    </label>
-                </div>
-                <div class="index-fn">
-                    <p>Ngày đăng</p>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Mới nhất</span
-                        >
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Cũ nhất</span
-                        >
-                    </label>
-                </div>
-                <div class="index-fn">
-                    <p>Giá</p>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Tăng dần</span
-                        >
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Giảm dần</span
-                        >
-                    </label>
-                </div>
-                <div class="index-fn">
-                    <p>Số km</p>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Tăng dần</span
-                        >
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Giảm dần</span
-                        >
-                    </label>
-                </div>
-                <div class="index-fn" style="border-bottom: none">
-                    <p>Năm sản xuất</p>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Mới đến cũ</span
-                        >
-                    </label>
-                    <label for="">
-                        <input type="radio" name="sorting" checked /><span
-                            >Cũ đến mới</span
-                        >
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Lấy ra input radio của tùy chọn "Liên quan nhất"
-        const defaultOption = document.querySelector('.index-fn:first-child input[type="radio"]');
-
-        // Đặt thuộc tính checked cho input radio mặc định
-        defaultOption.checked = true;
-    });
-
-    // Lấy phần tử nút và danh sách tùy chọn
-    const button = document.querySelector(".btn-function");
-    const cardList = document.querySelector(".card-list-function");
-
-    // Thêm sự kiện click cho nút
-    button.addEventListener("click", function () {
-        // Kiểm tra trạng thái hiện tại của danh sách tùy chọn
-        const isHidden = cardList.classList.contains("show");
-
-        // Nếu đang ẩn, hiển thị danh sách và kích hoạt hiệu ứng slide từ phải sang trái
-        // Nếu đang hiển thị, ẩn danh sách và kích hoạt hiệu ứng slide từ trái sang phải
-        if (!isHidden) {
-            cardList.classList.add("show");
-        } else {
-            // Thiết lập thời gian trễ trước khi thực hiện hiệu ứng đóng
-            setTimeout(function () {
-                cardList.style.animation = "slideFromLeft 0.5s forwards";
-            }, 100); // Đợi 0.1s trước khi bắt đầu hiệu ứng
-            // Đặt thuộc tính animation về null sau khi hoàn thành hiệu ứng
-            setTimeout(function () {
-                cardList.style.animation = null;
-                cardList.classList.remove("show");
-            }, 600); // Tổng thời gian của hiệu ứng là 0.5s + 0.1s (trễ)
-        }
-    });
-
-    // Lấy tất cả các input radio trong danh sách tùy chọn
-    const radioOptions = document.querySelectorAll('.index-fn input[type="radio"]');
-
-    // Lặp qua từng input radio và thêm sự kiện 'change' cho mỗi input
-    radioOptions.forEach(function (option) {
-        option.addEventListener("change", function () {
-            // Lấy ra phần tử span chứa nội dung hiện tại của thẻ "Sắp xếp"
-            const sortText = document.querySelector(".btn-function span");
-
-            // Lấy ra nội dung của tùy chọn đã chọn và gán cho thẻ "Sắp xếp"
-            const selectedOptionText = this.nextElementSibling.textContent;
-            sortText.textContent = selectedOptionText;
-
-            // Ẩn danh sách tùy chọn sau khi chọn xong
-            cardList.classList.remove("show");
-        });
-    });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Shadow Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        .box {
+  width: 200px;
+  height: 200px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  box-shadow: 2px 5px 5px 5px rgba(30, 112, 227, 0.3);
+}
+    </style>
+  <div class="box">
+    This is a box with shadow effect.
+  </div>
+</body>
+</html>

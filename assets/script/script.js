@@ -171,25 +171,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-document.addEventListener("DOMContentLoaded", function () {
-    // Lấy ra input radio của tùy chọn "Liên quan nhất"
-    const defaultOption = document.querySelector('.index-fn:first-child input[type="radio"]');
+function handleRadioChange(event) {
+    const selectedOption = event.target.value;
+    localStorage.setItem('selectedSortOption', selectedOption);
+}
 
-    // Đặt thuộc tính checked cho input radio mặc định
-    defaultOption.checked = true;
-});
-
-// Lấy phần tử nút và danh sách tùy chọn
 const button = document.querySelector(".btn-function");
 const cardList = document.querySelector(".card-list-function");
+const changeListText = document.querySelector(".change-list");
 
-// Thêm sự kiện click cho nút
-button.addEventListener("click", function () {
-    // Kiểm tra trạng thái hiện tại của danh sách tùy chọn
+// Load the selected option from localStorage on page load
+document.addEventListener("DOMContentLoaded", function() {
+    const savedSortOption = localStorage.getItem("selectedSortOption");
+    if (savedSortOption) {
+        changeListText.textContent = savedSortOption;
+        const radioInput = document.querySelector(`input[value="${savedSortOption}"]`);
+        if (radioInput) {
+            radioInput.checked = true;
+        }
+    }
+});
+
+// Add click event listener to the button
+button.addEventListener("click", function() {
     const isHidden = cardList.classList.contains("show");
-
-    // Nếu đang ẩn, hiển thị danh sách và kích hoạt hiệu ứng slide từ phải sang trái
-    // Nếu đang hiển thị, ẩn danh sách và kích hoạt hiệu ứng slide từ trái sang phải
     if (!isHidden) {
         cardList.classList.add("show");
     } else {
@@ -197,20 +202,15 @@ button.addEventListener("click", function () {
     }
 });
 
-// Lấy tất cả các input radio trong danh sách tùy chọn
-const radioOptions = document.querySelectorAll('.index-fn input[type="radio"]');
-
-// Lặp qua từng input radio và thêm sự kiện 'change' cho mỗi input
-radioOptions.forEach(function (option) {
-    option.addEventListener("change", function () {
-        // Lấy ra phần tử span chứa nội dung hiện tại của thẻ "Sắp xếp"
-        const sortText = document.querySelector(".btn-function span");
-
-        // Lấy ra nội dung của tùy chọn đã chọn và gán cho thẻ "Sắp xếp"
-        const selectedOptionText = this.nextElementSibling.textContent;
-        sortText.textContent = selectedOptionText;
-
-        // Ẩn danh sách tùy chọn sau khi chọn xong
-        cardList.classList.remove("show");
+// Add change event listener to all radio buttons
+const radioButtons = document.querySelectorAll(".index-fn input[type='radio']");
+radioButtons.forEach(radio => {
+    radio.addEventListener("change", function(event) {
+        changeListText.textContent = this.value;
+        handleRadioChange(event); // Store selected option in localStorage
+        const link = this.closest("a");
+        if (link) {
+            window.location.href = link.href;
+        }
     });
 });

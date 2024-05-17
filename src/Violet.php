@@ -1,61 +1,52 @@
 <?php
 require_once '../config/config.php'; // Kết nối cơ sở dữ liệu
 
-if (isset($_GET['select'])) {
-    $search_query = $_GET['select']; // Lấy tham số 'select' từ URL
-    $search_terms = explode(",", $search_query);
+$sql_count = "SELECT COUNT(*) AS total FROM cars_details WHERE color = 'Tím'";
+$result_count = $conn->query($sql_count);
+$row_count = $result_count->fetch_assoc();
+$total_toyota_cars = $row_count['total'];
 
-    // Build the SQL query to search for cars based on make or model
-    $sql = "SELECT 
-                c.id,
-                c.make,
-                c.model,
-                c.year,
-                c.mileage,
-                c.price,
-                cd.title AS car_title,
-                cd.transmission,
-                cd.fuel_type,
-                ci.front_image,
-                ci.rear_image,
-                ci.left_image,
-                ci.right_image,
-                ci.dashboard_image,
-                ci.inspection_image,
-                ci.other_image,
-                sc.province
-            FROM 
-                cars c
-            INNER JOIN 
-                cars_details cd ON c.id = cd.car_id
-            INNER JOIN 
-                cars_image ci ON c.id = ci.car_id
-            INNER JOIN 
-                sellers_car sc ON c.id = sc.car_id
-            WHERE";
+// In ra số lượng xe Toyota
+echo "<p class='total-cars'>Số lượng xe có màu Tím là: " . $total_toyota_cars . "</p>";
+echo "<div class='products-sp'>"; // Mở thẻ cha products-sp ở đây
 
-    foreach ($search_terms as $key => $term) {
-        $term = mysqli_real_escape_string($conn, $term);
-        if ($key > 0) {
-            $sql .= " OR";
-        }
-        $sql .= " make LIKE '%$term%' OR model LIKE '%$term%'";
-    }
+$sql = "SELECT 
+c.id,
+c.make,
+c.model,
+c.year,
+c.mileage,
+c.price,
+cd.title AS car_title,
+cd.transmission,
+cd.fuel_type,
+ci.front_image,
+ci.rear_image,
+ci.left_image,
+ci.right_image,
+ci.dashboard_image,
+ci.inspection_image,
+ci.other_image,
+sc.province,
+sc.image_url
+FROM cars_details cd
+INNER JOIN cars c ON c.id = cd.car_id
+INNER JOIN cars_image ci ON c.id = ci.car_id
+INNER JOIN sellers_car sc ON c.id = sc.car_id
+WHERE cd.color = 'Tím'";
+$result = $conn->query($sql);
 
-    $result = $conn->query($sql);
-
-    if (!$result) {
-        die("Lỗi truy vấn: " . $conn->error);
-    }
-
-    if ($result->num_rows > 0) {
-        echo "<p class='total-cars'>Tổng số lượng xe: " . $result->num_rows . "</p>";
-        echo "<div class='products-sp'>";
-        while ($row = $result->fetch_assoc()) {
-            // Hiển thị thông tin của xe
+// Kiểm tra kết quả trả về
+if ($result->num_rows > 0) {
+    // Duyệt qua từng hàng dữ liệu
+    while ($row = $result->fetch_assoc()) {
+        if (isset($row['id'])) {
+            // Định dạng lại số km
+            $formatted_mileage = number_format($row['mileage'], 0, '.');
+            // Hiển thị sản phẩm
             echo "<div class='products'>";
             echo "<a href='Details.php?id=" . $row['id'] . "' class='products-a'>";
-
+    
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";
             // Hiển thị hình ảnh của sản phẩm
@@ -66,7 +57,7 @@ if (isset($_GET['select'])) {
             echo "<div><img src='" . $row['dashboard_image'] . "' alt=''></div>";
             echo "<div><img src='" . $row['inspection_image'] . "' alt=''></div>";
             echo "<div><img src='" . $row['other_image'] . "' alt=''></div>";
-
+    
             echo "</div>";
             echo "</div>";
             echo "</a>";
@@ -84,7 +75,7 @@ if (isset($_GET['select'])) {
             echo "</ul>";
             echo "<ul>";
             // Hiển thị số km và hộ số
-            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $row["mileage"] . " Km</li>";
+            echo "<li><img src='../assets/images/icon3.svg' alt=''>" . $formatted_mileage . " KM</li>";
             echo "<li><img src='../assets/images/icon4.svg' alt=''>" . $row["transmission"] . "</li>";
             echo "</ul>";
             echo "</div>";
@@ -94,12 +85,11 @@ if (isset($_GET['select'])) {
             echo "</div>";
             echo "</div>";
         }
-        echo "</div>";
-    } else {
-        echo "<p class='total-cars'>Không có sản phẩm nào phù hợp</p>";
     }
-
-    $conn->close();
+} else {
+    echo "Không có sản phẩm nào";
 }
-?>
-    
+echo "</div>"; // Đóng thẻ cha products-sp ở đây
+
+// Đóng kết nối
+$conn->close();
