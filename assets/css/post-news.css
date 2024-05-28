@@ -85,7 +85,7 @@ label {
 .form-group textarea:focus {
     border: 1px solid #1a6fb7;
 }
-input[type="text"],
+.form-group input[type="text"],
 select,
 textarea {
     width: 100%;

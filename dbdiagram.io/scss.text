@@ -1,99 +1,170 @@
 Table users {
-    id int [pk]
-    full_name varchar(255)
-    phone_number varchar(20)
-    address varchar(255)
-    province varchar(255)
-    district varchar(255)
-    email varchar(255) [unique]
-    password varchar(255)
-  }
-  
-  Table admins {
-    id int [pk]
-    username varchar(50) [unique]
-    password varchar(255)
-    email varchar(255) [unique]
-    full_name varchar(255)
-    date_of_birth date
-    role enum('admin', 'editor') [default: 'admin']
-  }
-  
-  Table cars {
-    id int [pk]
-    make varchar(255)
-    model varchar(255)
-    version varchar(255)
-    year int
-    condition varchar(50)
-    mileage decimal(10)
-    price decimal(15)
-  }
-  
-  Table cars_details {
-    car_id int [pk, ref: > cars.id]
-    title varchar(255)
-    description text
-    transmission varchar(50)
-    origin varchar(255)
-    body_style varchar(50)
-    color varchar(50)
-    fuel_type varchar(50)
-    engine_capacity decimal(5, 2)
-    seats int
-  }
-  
-  Table cars_image {
-    id int [pk]
-    car_id int [ref: > cars.id]
-    shop_image varchar(255)
-    front_image varchar(255)
-    rear_image varchar(255)
-    left_image varchar(255)
-    right_image varchar(255)
-    dashboard_image varchar(255)
-    inspection_image varchar(255)
-    other_image varchar(255)
-  }
-  
-  Table sellers_car {
-    id int [pk]
-    name varchar(255)
-    company_name varchar(255)
-    province varchar(255)
-    address varchar(255)
-    phone varchar(20)
-    district varchar(255)
-    posted_date date
-    car_id int [ref: > cars.id]
-    image_url varchar(255)
-  }
-  
-  Table user_car_listing {
-    id int [pk]
-    user_id int [ref: > users.id]
-    car_id int [ref: > cars.id]
-    posted_date date
-  }
-  
-  Table users_image {
-    id int [pk]
-    user_id int [ref: > users.id]
-    avt_image varchar(255)
-    shop_image varchar(255)
-  }
-  
-  Table users_sell_cars {
-    id int [pk]
-    user_id int [ref: > users.id]
-    make varchar(255)
-    model varchar(255)
-    version varchar(255)
-    year int
-    mileage int
-    phone varchar(20)
-    posted_date date
-  }
-  
-  
-  Ref: "users"."id" < "users"."phone_number"
+    id INT [pk, increment]
+    full_name VARCHAR(255)
+    phone_number VARCHAR(20)
+    address VARCHAR(255)
+    province VARCHAR(255)
+    district VARCHAR(255)
+    email VARCHAR(255) [unique]
+    password VARCHAR(255) [note: "not null"]
+}
+
+Table admins {
+    id INT [pk, increment]
+    username VARCHAR(50) [unique]
+    password VARCHAR(255)
+    email VARCHAR(255) [unique]
+    full_name VARCHAR(255)
+    date_of_birth DATE
+    role ENUM('admin', 'editor') [default: 'admin']
+}
+
+Table cars {
+    id INT [pk, increment]
+    make VARCHAR(255)
+    model VARCHAR(255)
+    version VARCHAR(255)
+    year INT
+    condition VARCHAR(50)
+    mileage DECIMAL(10)
+    price DECIMAL(15)
+}
+
+Table cars_details {
+    car_id INT [pk, ref: > cars.id]
+    title VARCHAR(255)
+    description TEXT
+    transmission VARCHAR(50)
+    origin VARCHAR(255)
+    body_style VARCHAR(50)
+    color VARCHAR(50)
+    fuel_type VARCHAR(50)
+    engine_capacity DECIMAL(5, 2)
+    seats INT
+}
+
+Table cars_image {
+    id INT [pk, increment]
+    car_id INT [ref: > cars.id]
+    shop_image VARCHAR(255)
+    front_image VARCHAR(255)
+    rear_image VARCHAR(255)
+    left_image VARCHAR(255)
+    right_image VARCHAR(255)
+    dashboard_image VARCHAR(255)
+    inspection_image VARCHAR(255)
+    other_image VARCHAR(255)
+}
+
+Table sellers_car {
+    id INT [pk, increment]
+    name VARCHAR(255)
+    company_name VARCHAR(255)
+    province VARCHAR(255)
+    address VARCHAR(255)
+    phone VARCHAR(20)
+    district VARCHAR(255)
+    posted_date DATE
+    car_id INT [ref: > cars.id]
+    image_url VARCHAR(255)
+}
+
+Table customer_stores {
+    id INT [pk, increment]
+    customer_id INT [ref: > users.id]
+    store_name VARCHAR(255)
+    store_province VARCHAR(255)
+    store_district VARCHAR(255)
+    store_description TEXT
+    store_location VARCHAR(255)
+    store_phone VARCHAR(20)
+    store_email VARCHAR(255)
+    store_website VARCHAR(255)
+    store_image1 VARCHAR(255)
+    store_image2 VARCHAR(255)
+    store_image3 VARCHAR(255)
+    created_at TIMESTAMP [default: `current_timestamp`]
+}
+
+Table listing_packages {
+    id INT [pk, increment]
+    name VARCHAR(255)
+    description TEXT
+    price DECIMAL(15, 2)
+    duration_days INT
+}
+
+Table package_purchases {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    package_id INT [ref: > listing_packages.id]
+    purchase_date DATE
+    expiry_date DATE
+}
+
+Table payments {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    package_id INT [ref: > listing_packages.id]
+    payment_date DATE
+    amount DECIMAL(15, 2)
+    payment_method VARCHAR(50)
+    payment_status ENUM('Pending', 'Completed', 'Failed') [default: 'Pending']
+}
+
+Table account_balance {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    total_amount DECIMAL(15, 2)
+    last_updated DATE
+}
+
+Table wishlist {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    car_id INT [ref: > cars.id]
+    added_date DATE
+}
+
+Table users_sell_cars {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    make VARCHAR(255)
+    model VARCHAR(255)
+    version VARCHAR(255)
+    year INT
+    mileage INT
+    phone VARCHAR(20)
+    posted_date DATE
+}
+
+Table user_car_listing {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    car_id INT [ref: > cars.id]
+    package_id INT [ref: > listing_packages.id]
+}
+
+Table transaction_history {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    transaction_content TEXT
+    transaction_datetime DATETIME
+    credit DECIMAL(15, 2) [default: 0]
+    debit DECIMAL(15, 2) [default: 0]
+    status ENUM('Pending', 'Completed', 'Failed') [default: 'Pending']
+    gateway VARCHAR(50)
+}
+
+Table customer_cars_management {
+    id INT [pk, increment]
+    user_id INT [ref: > users.id]
+    car_id INT [ref: > cars.id]
+    title VARCHAR(255)
+    view_count INT [default: 0]
+    phone_view_count INT [default: 0]
+    message_count INT [default: 0]
+    push_count INT [default: 0]
+    expiry_date DATE
+    status ENUM('listed', 'expired') [default: 'listed']
+}

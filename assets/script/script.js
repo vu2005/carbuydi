@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 function functionClick(element) {
     var functionNav = element.nextElementSibling;
     toggleDisplay(functionNav);
@@ -159,9 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const listItem = location.closest("li");
                 if (
                     location.textContent
-                        .trim()
-                        .toLowerCase()
-                        .includes(searchText)
+                    .trim()
+                    .toLowerCase()
+                    .includes(searchText)
                 ) {
                     listItem.style.display = ""; // Show matching item
                 } else {
@@ -171,9 +172,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 function handleRadioChange(event) {
     const selectedOption = event.target.value;
-    localStorage.setItem('selectedSortOption', selectedOption);
+    localStorage.setItem("selectedSortOption", selectedOption);
 }
 
 const button = document.querySelector(".btn-function");
@@ -181,11 +183,13 @@ const cardList = document.querySelector(".card-list-function");
 const changeListText = document.querySelector(".change-list");
 
 // Load the selected option from localStorage on page load
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const savedSortOption = localStorage.getItem("selectedSortOption");
     if (savedSortOption) {
         changeListText.textContent = savedSortOption;
-        const radioInput = document.querySelector(`input[value="${savedSortOption}"]`);
+        const radioInput = document.querySelector(
+            `input[value="${savedSortOption}"]`
+        );
         if (radioInput) {
             radioInput.checked = true;
         }
@@ -193,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Add click event listener to the button
-button.addEventListener("click", function() {
+button.addEventListener("click", function () {
     const isHidden = cardList.classList.contains("show");
     if (!isHidden) {
         cardList.classList.add("show");
@@ -204,8 +208,8 @@ button.addEventListener("click", function() {
 
 // Add change event listener to all radio buttons
 const radioButtons = document.querySelectorAll(".index-fn input[type='radio']");
-radioButtons.forEach(radio => {
-    radio.addEventListener("change", function(event) {
+radioButtons.forEach((radio) => {
+    radio.addEventListener("change", function (event) {
         changeListText.textContent = this.value;
         handleRadioChange(event); // Store selected option in localStorage
         const link = this.closest("a");

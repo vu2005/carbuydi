@@ -45,8 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              });
           </script>';
             } else {
-                // Hiển thị thông báo vui lòng đăng nhập nếu user_id bằng 0
-
                 echo '<div class="toast success">';
                 echo '<i class="fas fa-check-circle"></i>';
                 echo '<span class="msg">Thông tin đã được gửi thành công!</span>';

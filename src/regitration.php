@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($check_email_query);
     if ($result->num_rows > 0) {
         echo '<div class="toast error">';
-        echo '<i class="fas fa-check-circle"></i>';
+        echo '<i class="fas fa-exclamation-triangle"></i>';
         echo '<span class="msg">Email của bạn đã tồn tại trong dữ liệu!</span>';
         echo '</div>';
 

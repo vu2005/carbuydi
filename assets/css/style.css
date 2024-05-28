@@ -6,7 +6,7 @@
     box-sizing: border-box;
 }
 
-.body-search input {
+.body-search [type="text"] {
     border: none;
     font-size: 16px;
     padding: 0 3px;
@@ -15,6 +15,7 @@
     height: 50px auto;
     max-width: 100%;
 }
+
 .body-main {
     display: flex;
     justify-content: space-between;

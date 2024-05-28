@@ -53,7 +53,8 @@ if (isset($_GET['select'])) {
         while ($row = $result->fetch_assoc()) {
             // Hiển thị thông tin của xe
             echo "<div class='products'>";
-            echo "<a href='Details.php?id=" . $row['id'] . "' class='products-a'>";
+            echo "<a href='Details.php?id=" . $row['id'] . "&make=" . $row['make'] . "' class='products-a'>";
+
 
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";

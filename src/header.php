@@ -120,7 +120,7 @@ if ($user) {
                     </li>
                     <li><a href="<?php echo 'CarSell.php?user_id=' . ($user_id ? $user_id : 0); ?>">Bán Xe </a></li>
                     <li><a href="about.php">Giới Thiệu</a></li>
-                    <li><a href="New.php">Tin Tức</a></li>
+                    <li><a href="https://www.carmudi.vn/blog-xe-hoi/">Tin Tức</a></li>
                 </ul>
             </nav>
         </div>

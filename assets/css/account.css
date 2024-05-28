@@ -49,17 +49,33 @@
     font-size: 14px;
     border: none;
     border-radius: 7px;
+    text-decoration: none;
     margin-right: 5px;
+}
+.account-bt > .ch:hover {
+    transition: 0.25s;
+    background: #8d6a32;
 }
 .account-bt > .dt {
     font-size: 14px;
+    text-decoration: none;
     border-radius: 7px;
     padding: 10px 20px;
     color: #fff;
     border: none;
     background: #1a6fb7;
 }
+.account-bt > .dt:hover {
+    transition: 0.25s;
+    background: #1d4a70;
+}
 .account-container {
+    background: #fff;
+    border: 1px solid #adadad;
+    border-radius: 10px;
+    width: 870px;
+}
+.account_text {
     background: #fff;
     border: 1px solid #adadad;
     border-radius: 10px;
@@ -92,6 +108,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng box shadow */
 }
 .account-container > h2 {
+    border-bottom: 1px solid #808080;
+    padding: 20px;
+}
+.account_text > h2 {
     border-bottom: 1px solid #808080;
     padding: 20px;
 }
@@ -178,7 +198,7 @@
     cursor: pointer;
 }
 
-.account-eye>input {
+.account-eye > input {
     border-radius: 10px;
     border: none;
     outline: navajowhite;
@@ -200,4 +220,451 @@
 
 .account-eye i.active::after {
     opacity: 1;
+}
+.store-menu {
+    width: 100%;
+}
+.store-menu > ul {
+    padding: 20px;
+    justify-content: start;
+    background: #e8eaf1;
+    display: flex;
+}
+.store-menu > ul > li {
+    margin: 0 20px;
+    list-style: none;
+}
+.store-menu > ul > li > a {
+    color: #114a7a99;
+    font-weight: 500;
+    text-decoration: none;
+}
+.store-menu > ul > li > a:hover {
+    color: #1a6fb7;
+}
+.store-main {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+.store-img {
+    width: 220px;
+    height: 130px;
+}
+.store-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.store-ft {
+    padding: 0px 20px;
+    margin-bottom: 20px;
+}
+
+.nap-xu {
+    width: 220px;
+    height: 150px;
+    background: #e8eaf1;
+    border-radius: 10px;
+}
+.nx-body {
+    padding: 20px;
+}
+.nx-body button {
+    width: 180px;
+    height: 40px;
+    color: #1a6fb7;
+    font-weight: 500;
+    border: 1px solid #1a6fb7;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #e8eaf1;
+}
+.nx-body > p {
+    margin-bottom: 10px;
+}
+.nx-body a {
+    text-align: center;
+    cursor: pointer;
+    background: #e8eaf1;
+    text-decoration: none;
+}
+.store-info ul li {
+    margin: 10px 0;
+    list-style: none;
+}
+.navbar-cars {
+    padding: 10px;
+    display: flex;
+    background: #cfe8f4;
+}
+.navbar-cars > .post-1 {
+    margin-right: 100px;
+    padding: 8px;
+}
+.navbar-cars > .post-2 {
+    padding: 8px;
+}
+.navbar-cars > .post-1 ul li,
+.navbar-cars > .post-2 ul li {
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 2px;
+    list-style: none;
+}
+.cars-container > .pd_30 {
+    padding: 30px;
+}
+.navbar-cars > .post-1 ul li b,
+.navbar-cars > .post-2 ul li b {
+    margin-right: 6px;
+}
+.filter-car {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+.filter_1 {
+    display: flex;
+}
+.filter_1 > p {
+    margin: auto;
+}
+.filter_2 {
+    display: flex;
+}
+.search_cars {
+    margin-left: 15px;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #adadad;
+    border-radius: 8px;
+}
+.search_cars:focus-within {
+    border: 1px solid #1a6fb7;
+}
+.search_cars > input {
+    border: none;
+    background-color: #f9f9f9;
+    outline: none;
+}
+.search_cars > i {
+    font-size: 13px;
+    color: #808080;
+}
+/* Container for the filters */
+.filter_2 {
+    display: flex;
+    gap: 10px; /* Space between the dropdowns */
+}
+
+/* Common styles for both dropdowns */
+.cars_select_1 select,
+.cars_select_2 select {
+    width: 150px; /* Adjust width as needed */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Ensure the arrow icon is displayed */
+.cars_select_1 select:after,
+.cars_select_2 select:after {
+    content: "\25BC"; /* Downward arrow character */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* To handle select arrows and position them correctly */
+.cars_select_1,
+.cars_select_2 {
+    position: relative;
+    display: inline-block;
+}
+
+/* Remove default select arrow for better custom styling */
+.cars_select_1 select::-ms-expand,
+.cars_select_2 select::-ms-expand {
+    display: none;
+}
+
+/* Adjust hover and focus states for better UX */
+.cars_select_1 select:hover,
+.cars_select_2 select:hover,
+.cars_select_1 select:focus,
+.cars_select_2 select:focus {
+    border-color: #bbb;
+    outline: none;
+}
+.cars_select_1 select:focus,
+.cars_select_2 select:focus {
+    border: 1px solid #1a6fb7;
+}
+/* Style for the table container */
+.cars_menu {
+    width: 100%;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the table */
+.cars_menu table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures there are no white lines between cells */
+}
+
+/* Style for table header */
+.cars_menu thead {
+    background-color: #e0e3e9;
+}
+
+.cars_menu th {
+    padding: 7px;
+    width: 200px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd; /* Adds a bottom border */
+    color: #000;
+}
+
+/* Style for table body rows */
+.cars_menu tbody tr {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd; /* Adds a border between rows */
+}
+
+.cars_menu td {
+    padding: 7px;
+    padding-bottom: 40px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    text-align: left;
+    vertical-align: top; /* Aligns content to the top */
+}
+
+/* Style for the image and text container */
+.cars_menu .image {
+    display: flex;
+    align-items: center;
+    width: 240px;
+}
+.cars_menu .image img {
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+/* Style for the ID and name container */
+.cars_menu .id_name {
+    display: inline-block;
+}
+
+/* Style for status column */
+.cars_menu .status {
+    color: green;
+    font-weight: bold;
+    position: relative;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Style for action buttons */
+.cars_menu .action {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    margin-top: 20px;
+    flex-wrap: nowrap; /* Ensure buttons stay in a single row */
+}
+.cars_menu .action > a {
+    text-decoration: none;
+}
+.cars_menu .action button {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    color: #1a6fb7;
+    white-space: nowrap; /* Ensure buttons don't wrap text */
+}
+
+.cars_menu .action button:hover {
+    border-color: #1a6fb7;
+    transition: 0.2s;
+}
+
+.cars_menu .action i {
+    color: #1a6fb7;
+}
+.cars_menu.pay tbody th {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.nx-box select {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.nx-box button {
+    padding: 9px 60px;
+    font-size: 16px;
+    color: #fff;width: 30%;
+    background-color: #1a6fb7;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.nx-box button:hover {
+    background-color: #0056b3;
+}
+
+.nap-xu-pay {
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: white;
+}
+.nx-box {
+    border: 1px solid #adadad;
+    border-radius: 10px;
+    width: 700px;
+}
+
+.form-pay > form {
+    padding: 40px;
+    display: flex;
+    text-align: left;
+    flex-direction: column; /* Stack children vertically */
+}
+
+#amount {
+    width: 140px;margin: 10px 0;
+}
+.method {
+    background: #eef1f4;
+    padding: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 50vh;
+}
+
+.method_pay {
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    margin: 0 200px;
+}
+
+.method_pay h1 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 500;
+}
+.method_pay p {
+    font-weight: 400;
+    margin: 17px 0;
+    font-size: 14px;
+}
+
+.form_mt_all {
+    justify-content: space-between;
+    display: flex;
+}
+
+.form_mt1 {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 5px;
+    width: 100%;
+}
+.form_mt > .form_mt01 {
+    width: 360px;
+    padding: 20px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+.form_mt1 input {
+    margin-right: 10px;
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    margin: auto 10px;
+}
+
+.form_mt1 img {
+    width: 50px;
+    margin-left: 5px;
+    height: auto;
+}
+
+.form_mt b {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.form_mt button {
+    padding: 15px 150px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    background-color: #ff9800;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.form_mt button:hover {
+    background-color: #e68900;
+    transition: 0.25s;
+}
+.form_mt02 {
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #adadad;
+}
+.fw400 {
+    font-weight: 400;
+}
+.flex_row p {
+    font-weight: 400;
 }

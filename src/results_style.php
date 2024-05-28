@@ -54,7 +54,8 @@ if (isset($_GET['select'])) {
             $formatted_mileage = number_format($row['mileage'], 0, '.');
             // Hiển thị thông tin của xe
             echo "<div class='products'>";
-            echo "<a href='Details.php?id=" . $row['id'] . "' class='products-a'>";
+            echo "<a href='Details.php?id=" . $row['id'] . "&make=" . $row['make'] . "' class='products-a'>";
+
 
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";

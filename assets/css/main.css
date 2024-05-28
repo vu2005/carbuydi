@@ -54,7 +54,7 @@
     font-weight: 500;
     color: #000000ed;
 }
-.index-fn input {
+.index-fn  input[type="radio"]{
     width: 20px;
     cursor: pointer;
     height: 20px;

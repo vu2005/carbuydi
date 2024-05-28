@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .payment-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            width: 48%;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .payment-method img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .qr-code {
+            margin-top: 10px;
+        }
+        .copy-content {
+            background-color: #00c0e4;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Nội dung chuyển khoản</h1>
+        <div class="copy-content" onclick="copyToClipboard('subgiare387573')">
+            subgiare387573 <span style="font-size: 14px;">📋</span>
+        </div>
+    </div>
+
+    <div class="payment-info">
+        <div class="payment-method">
+            <img src="../assets/images/mb_bank.png" alt="Mb Bank">
+            <p>Số tài khoản: 1021572769</p>
+            <p>Chủ tài khoản: HOANG VAN LINH</p>
+            <p>Tỉ giá: 1 VNĐ = 1 coin.</p>
+            <p>Nạp tối thiểu: 10,000 VNĐ</p>
+            <div class="qr-code">
+                <img src="../assets/images/mb_bank_admin.png" alt="QR Code Mb Bank">
+            </div>
+        </div>
+        <div class="payment-method">
+            <img src="../assets/images/momo.png" alt="Momo">
+            <p>Số điện thoại: 0819123666</p>
+            <p>Chủ tài khoản: Hoàng Văn Lĩnh</p>
+            <p>Tỉ giá: 1 VNĐ = 1 coin.</p>
+            <p>Nạp tối thiểu: 10,000 VNĐ</p>
+            <div class="qr-code">
+                <img src="../assets/images/momo_admin.png" alt="QR Code Momo">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard(text) {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("Copied: " + text);
+    }
+</script>
+
+</body>
+</html>

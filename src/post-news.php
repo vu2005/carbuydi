@@ -1,16 +1,7 @@
 <?php
 require_once '../config/config.php';
-
 // Kiểm tra nếu biểu mẫu đã được gửi đi
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Kết nối đến cơ sở dữ liệu
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Kiểm tra kết nối
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-
     // Bắt đầu một giao dịch
     $conn->begin_transaction();
 

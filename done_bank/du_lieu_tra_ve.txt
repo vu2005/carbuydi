@@ -1,0 +1,11 @@
+&partnerCode=MOMOBKUN20180529
+&orderId=1716894323
+&requestId=1716894323
+&amount=100000
+&orderInfo=Thanh+to%C3%A1n+qua+MoMo+ATM
+&orderType=momo_wallet
+&transId=4049795940
+&resultCode=0
+&message=Successful.
+&payType=napas
+&responseTime=1716894368297

@@ -117,7 +117,7 @@
             <h1 style="color: white;">Mua hoặc bán xe ngay hôm nay</h1>
             <p style="color: white; font-weight: 400;">Cho dù là xe mới hay xe cũ, Carbuydi luôn có sẵn để bạn lựa chọn chiếc xe mà bạn yêu thích.</p>
             <div class="scroll-button">
-                <button class="scroll-btn show-on-scroll left-to-right"><a href="ban-xe.php" style="color: #1a6fb7;">Bán xe ngay</a></button>
+                <button class="scroll-btn show-on-scroll left-to-right"><a href="CarSell.php" style="color: #1a6fb7;">Bán xe ngay</a></button>
                 <button style="background: #1a6fb7;" class="scroll-btn show-on-scroll right-to-left"><a href="index.php" style="color: #fff; ">Mua xe ngay</a></button>
             </div>
         </div>

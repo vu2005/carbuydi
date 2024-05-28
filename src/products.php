@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
 
             // Hiển thị sản phẩm
             echo "<div class='products'>";
-            echo "<a href='Details.php?id=" . $row['id'] . "' class='products-a'>";
+            echo "<a href='Details.php?id=" . $row['id'] . "&make=" . $row['make'] . "' class='products-a'>";
 
             echo "<div class='header-products'>";
             echo "<div class='carousel'>";

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/css/function.css">
     <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/footer.css" />
+    <link rel="stylesheet" href="../assets/css/list-car.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
@@ -24,6 +25,7 @@
     require_once("header.php");
     require_once("sidebar.php");
     require_once("main.php");
+    include('list-car.php');
     require_once("footer.php");
     ?>
 
@@ -43,6 +45,7 @@
             });
         });
     </script>
+   
 </body>
 
 

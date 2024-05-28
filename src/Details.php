@@ -354,8 +354,28 @@ function convertNumberToWords($number)
                 </div>
             </div>
         </div>
-    </div>
+        <div class="cars_tt">
+            <h2>Xe tương tự</h2>
+            <?php
+            // Lấy giá trị của tham số 'make' từ URL
+            $make = $_GET['make'];
 
+            // Kiểm tra xem $make có tồn tại không
+            if (isset($make)) {
+                // Include file tương ứng với make
+                include($make . '.php');
+            } else {
+                // Nếu 'make' không được truyền qua URL, bạn có thể xử lý tùy ý tại đây
+                echo "Không tìm thấy dữ liệu 'make' trong URL.";
+            }
+            ?>
+        </div>
+    </div>
+<?php
+include('list-car.php');
+include('footer.php');
+
+?>
     <script src="../assets/script/script.js"></script>
 </body>
 
